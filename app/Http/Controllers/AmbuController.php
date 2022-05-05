@@ -65,4 +65,26 @@ class AmbuController extends Controller
         }
       
     }
+    public function ambulist(Request $request){
+    
+        $pl=$request->input('place');
+        $sql=Ambu::where('place',$pl)
+        ->where('status','=','1')
+        ->get();
+        $count=Ambu::where('place',$pl)->where('status','=','1')->count();
+        if($count>0){
+            return view('/ambulist',['a'=>$sql]);
+            die();
+        }else{
+            return view('/ambulist',['a'=>$sql]);
+        }
+
+    }
+    public function req_ambu($id){
+
+        echo 'User ID = '. $id. "<br />";
+       
 }
+
+}
+   

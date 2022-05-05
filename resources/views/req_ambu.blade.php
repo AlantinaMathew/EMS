@@ -186,7 +186,7 @@ a{
   @auth
   <a href="/">Home</a>
   <a href="/about">About Us</a>
-
+  <a href="/req_ambu">Ambulance Request</a>
   <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
   <div class="dropdown-content">
@@ -199,35 +199,16 @@ a{
     
   </div>
 </div>
-  @else
-    <a href="/">Home</a>
-    <a href="/about">About Us</a> 
-    <!--a href="contact.php">Contact Us</a>--->
-   
-    <a href="{{ route('login') }}"style="background-color: red;
-  box-shadow: 0 5px 0 darkred;
-  color: white;
-  margin:5px;
-  /* padding: 1em 1.5em; */
-  position: relative;
-  text-decoration: none;
-  text-transform: uppercase;">Login</a>
-  @if (Route::has('register'))
-  <a href="{{ route('register') }}"style="background-color: black;
-  box-shadow: 0 5px 0 darkred;
-  color: white;
-  margin:5px;
-  /* padding: 1em 1.5em; */
-  position: relative;
-  text-decoration: none;
-  text-transform: uppercase;">Register</a>
-   @endif
-                    @endauth
+            @endauth
   </div>
   @endif
 </div>
-@include('sweetalert::alert')
-  @yield('content');
+
+
+
+
+
+
    
   <script>
         let arrow = document.querySelectorAll(".arrow");
