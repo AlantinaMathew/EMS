@@ -267,6 +267,7 @@ a{
   @auth
   <a href="/">Home</a>
   <a href="/about">About Us</a>
+  <a href="/search_a">Find Ambulance</a>
   <a href="/req_ambu">Ambulance Request</a>
   <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
@@ -308,6 +309,14 @@ a{
                         </select>
                     </div>
                 </div>
+                <div class="row">
+                        <div class="col-25">
+                            <label for="Location">Location</label>
+                        </div>
+                        <div class="col-75">
+                            <textarea id="location" name="location" placeholder="Write Location.." style="height:200px"required></textarea>
+                        </div>
+                    </div>
                 <div class="row">
                     <input type="submit" name="sbt_donor" value="Search">
 

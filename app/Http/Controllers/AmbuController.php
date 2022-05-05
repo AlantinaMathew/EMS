@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\req_ambu;
 use App\Models\ambu;
+use App\Models\user;
+use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,10 +38,10 @@ class AmbuController extends Controller
         $adduser->save();
         return redirect('/log_ambu');
 
-    }else{
+     }else{
         return redirect()->back()->with('message','Password should be same');
     }
-}
+    }
     }
     public function log(Request $request){
         $em=$request->input('email');
@@ -66,24 +69,64 @@ class AmbuController extends Controller
       
     }
     public function ambulist(Request $request){
-    
+        $userID=auth()->user()->id;
         $pl=$request->input('place');
-        $sql=Ambu::where('place',$pl)
-        ->where('status','=','1')
-        ->get();
-        $count=Ambu::where('place',$pl)->where('status','=','1')->count();
-        if($count>0){
+        session(['ambu_loc' => $request->input('location')]);
+        $find=Req_ambu::where('uid',$userID)
+        ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())->count();
+       if($find>0){
+       
+        $sql=Ambu::join('tbl_req_ambu','tbl_req_ambu.aid','<>','tbl_ambu.id')
+        ->where('tbl_ambu.place','=',$pl)
+       ->where('tbl_ambu.status','=','1')
+       
+        ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
+        
+        ->get(['tbl_ambu.id','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone','tbl_ambu.email']);
+}else{
+    $sql=Ambu::where('place','=',$pl)
+        ->where('status','=','1')->get();}
+    if($sql)
+        {
             return view('/ambulist',['a'=>$sql]);
-            die();
-        }else{
-            return view('/ambulist',['a'=>$sql]);
-        }
+           
+        }  
+      
 
     }
     public function req_ambu($id){
+        
+        $userID=auth()->user()->id;
 
-        echo 'User ID = '. $id. "<br />";
+        $loc=session('ambu_loc');
+        $sql=new Req_ambu();
+        $sql->uid=$userID;
+        $sql->aid=$id;
+        $sql->location=$loc;
+        $sql->status=1;
+        $sql->save();
+    
+
+        $find=Req_ambu::join('tbl_ambu','tbl_req_ambu.aid','=','tbl_ambu.id')
+        ->where('tbl_req_ambu.uid','=',$userID)
+        ->where('created_at', '>=', Carbon::now()->subDay())->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone']);
        
+            return view('/req_ambu',['a'=>$find]);
+           die();      
+}
+public function req_ambu1(){
+        
+    $userID=auth()->user()->id;
+
+   
+
+
+    $find=Req_ambu::join('tbl_ambu','tbl_req_ambu.aid','=','tbl_ambu.id')
+    ->where('tbl_req_ambu.uid','=',$userID)
+    ->where('created_at', '>=', Carbon::now()->subDay())->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone']);
+   
+        return view('/req_ambu',['a'=>$find]);
+       die();      
 }
 
 }

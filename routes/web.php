@@ -46,11 +46,13 @@ Route::view('/log_ambu', 'ambu_login');
 Route::view('/ambu', 'ambu_reg');
 Route::POST('/reg_ambu',[AmbuController::class, 'reg']);
 
-Route::get('user/{id}', [AmbuController::class, 'req_ambu'])->name('req_ambu');
+
+Route::get('/request/{id}', [AmbuController::class, 'req_ambu']) -> name('req');
 //Route::POST('/req_ambu',[AmbuController::class, 'req']);
 Route::POST('/ambulog',[AmbuController::class, 'log']);
 Route::POST('/search_ambu',[AmbuController::class, 'ambulist']);
 Route::POST('/admin',[AdminController::class, 'log']);
+Route::get('/req_ambu',[AmbuController::class, 'req_ambu1']);
 
 
 Route::get('/log_fuel', function () {

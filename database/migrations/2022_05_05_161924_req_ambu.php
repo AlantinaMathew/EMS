@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('tbl_req_ambu', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            
            // $table->integer('phone');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('uid');
+            $table->integer('aid');
+            $table->integer('location');
             $table->timestamps();
+            $table->string('status');
+            
+            
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_req_ambu');
+        //
     }
 };
