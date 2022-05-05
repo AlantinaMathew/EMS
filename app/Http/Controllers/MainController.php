@@ -74,10 +74,10 @@ class MainController extends Controller
           $altblood='O Negative';
           //$userID=auth()->user()->id;
           $donor=DonorReg::join('users', 'users.id', '=', 'tbl_donor.uid')
-          ->where([['users.place','=', $place],['users.id','<>', $userID],['tbl_donor.bloodgrp','=',$blood]])
+          ->where([['users.place','=', $place],['users.id','<>', $userID],['tbl_donor.status','=','1'],['tbl_donor.bloodgrp','=',$blood]])
           
   
-          ->orWhere([['users.place','=', $place],['users.id','<>', $userID],['tbl_donor.bloodgrp','=',$altblood]])
+          ->orWhere([['users.place','=', $place],['users.id','<>', $userID],['tbl_donor.status','=','1'],['tbl_donor.bloodgrp','=',$altblood]])
           
           ->get(['tbl_donor.bloodgrp', 'users.place','users.phone']);
           $userID=auth()->user()->id;
@@ -133,6 +133,53 @@ class MainController extends Controller
         }
           
         }
+        public static function donor3(Request $request){
+          //$userID=auth()->user()->id;
+          $userID=auth()->user()->id;
+          $find=  DonorReg::where('uid','=',$userID)->first();
+          //dd($find);
+          if($find===null){
+            $status = 0;
+            //alert("fyfy");
+            return view('/edit_donor',['a'=>$status]);
+            die();
+        }else{
+          //$sql=  DonorReg::where('uid','=',$userID)->get();
+          $status = 1;
+         // alert("fyfy");
+          return view('/edit_donor',['a'=>$status]);
+          die();
+        }
+          
+        }
+        public static function donor4(Request $request){
+          //$userID=auth()->user()->id;
+          $userID=auth()->user()->id;
+          if($request->input('med')=="Yes" || $request->input('dc')=="No")
+          {
+            
+           
+          $update= DonorReg::where('uid','=',$userID)->first();
+          $update->weight=$request->input('weight');
+          $update->medlyf=$request->input('med');
+          $update->donor=$request->input('dc');
+          $update->status=0;
+          $update->save();
+          }else{
+ 
+            $update= DonorReg::where('uid','=',$userID)->first();
+            $update->weight=$request->input('weight');
+            $update->medlyf=$request->input('med');
+            $update->donor=$request->input('dc');
+            $update->status=1;
+            $update->save();
+
+          }
+
+ return redirect()->back()->with('message','Successfully Updated');
+          
+        }
+
         public static function check_reg_donor1(Request $request){
           $userID=auth()->user()->id;
           $find=  DonorReg::where('uid','=',$userID)->first();

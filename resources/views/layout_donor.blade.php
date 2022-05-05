@@ -186,6 +186,7 @@ a{
   @auth
   <a href="/">Home</a>
   <a href="/about">About Us</a>
+  <a href="/search_d">Find Donor</a>
   @if($a === 0)
     <a href="/regdonor">Register As Donor</a>
   @else

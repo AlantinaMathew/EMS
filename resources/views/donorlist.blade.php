@@ -36,7 +36,7 @@
                     {{$tr->bloodgrp}}
                 </td>
                 <td>
-                    <button>call</button>
+                    <a href="https://wa.me/{{$tr->phone}}"><button>call</button></a>
                 </td>
             </tr>
             @endforeach

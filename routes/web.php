@@ -40,7 +40,8 @@ Route::get('/search_d',[MainController::class, 'check_reg_donor']);
 Route::get('/regdonor', [MainController::class, 'check_reg_donor1']);
 Route::get('/view_d',[MainController::class, 'check_reg_donor2']);
 Route::get('/donor_pro', [MainController::class, 'donor2']);
-
+Route::get('/edit_donor',[MainController::class, 'donor3']);
+Route::POST('/edit_ddon',[MainController::class, 'donor4']);
 Route::view('/log_ambu', 'ambu_login');
 Route::view('/ambu', 'ambu_reg');
 Route::POST('/reg_ambu',[AmbuController::class, 'reg']);
