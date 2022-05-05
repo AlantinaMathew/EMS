@@ -45,7 +45,7 @@ Route::POST('/edit_ddon',[MainController::class, 'donor4']);
 Route::view('/log_ambu', 'ambu_login');
 Route::view('/ambu', 'ambu_reg');
 Route::POST('/reg_ambu',[AmbuController::class, 'reg']);
-
+Route::POST('/dash_ambu', [AmbuController::class, 'dash']);
 
 Route::get('/request/{id}', [AmbuController::class, 'req_ambu']) -> name('req');
 //Route::POST('/req_ambu',[AmbuController::class, 'req']);

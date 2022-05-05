@@ -49,9 +49,14 @@ class AmbuController extends Controller
        $login=Ambu::where('email',$em)
        ->where('password',$ps)
        ->count();
+
+       $log=Ambu::where('email',$em)
+       ->where('password',$ps)
+       ->get(['id']);
         if($login>0)
         {
-            
+            session()->put('ambu_id',$log);
+            session()->save();
                 $name = 'ambulance';
                // Session::put('name' , $name);
                 session()->put('name',$name);
@@ -128,6 +133,15 @@ public function req_ambu1(){
         return view('/req_ambu',['a'=>$find]);
        die();      
 }
+public function dash(){
+    $id=session('ambu_id');
+    $find=Req_ambu::where('aid','=',$id)->where('created_at', '>=', Carbon::now()->subDay())->where('status', '=', 1)->count();
+    if($find>0){
+
+    }
+}
+
+
 
 }
    
