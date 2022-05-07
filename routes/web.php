@@ -45,7 +45,8 @@ Route::POST('/edit_ddon',[MainController::class, 'donor4']);
 Route::view('/log_ambu', 'ambu_login');
 Route::view('/ambu', 'ambu_reg');
 Route::POST('/reg_ambu',[AmbuController::class, 'reg']);
-Route::POST('/dash_ambu', [AmbuController::class, 'dash']);
+Route::get('/dash_ambu', [AmbuController::class, 'dash']);
+Route::get('/dash_fuel', [FuelController::class, 'dash']);
 
 Route::get('/request/{id}', [AmbuController::class, 'req_ambu']) -> name('req');
 //Route::POST('/req_ambu',[AmbuController::class, 'req']);
@@ -54,6 +55,9 @@ Route::POST('/search_ambu',[AmbuController::class, 'ambulist']);
 Route::POST('/admin',[AdminController::class, 'log']);
 Route::get('/req_ambu',[AmbuController::class, 'req_ambu1']);
 
+Route::get('/decline/{id}', [AmbuController::class, 'req_decline_ambu']) -> name('decline_ambu');
+Route::get('/accept/{id}', [AmbuController::class, 'req_accept_ambu']) -> name('accept_ambu');
+Route::get('/complete/{id}', [AmbuController::class, 'req_cmplt_ambu']) -> name('cmplt_ambu');
 
 Route::get('/log_fuel', function () {
     return view('fuel_login');

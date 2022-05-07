@@ -10,7 +10,7 @@ class FuelController extends Controller
 {
     public function reg(Request $request){
         $em=$request->input('email');
-        
+        $string=implode(",",$request->input('place'));
        $log=Fuel::where('email',$em)
        
        ->count();
@@ -25,10 +25,10 @@ class FuelController extends Controller
         $adduser->name=$request->input('name');
         $adduser->email=$request->input('email');
         $adduser->phone=$request->input('phone');
-        $adduser->place=$request->input('place');
+        $adduser->place=$string;
         $adduser->password=$request->input('password');
         $adduser->save();
-        return redirect('/log_fuel');
+        return view('/log_fuel');
     }else{
         return redirect()->back()->with('message','Password should be same');
     }
@@ -40,6 +40,9 @@ class FuelController extends Controller
        $login=Fuel::where('email',$em)
        ->where('password',$ps)
        ->count();
+       $logf=Fuel::where('email',$em)
+       ->where('password',$ps)
+       ->get();
         if($login>0)
         {
             
@@ -47,8 +50,16 @@ class FuelController extends Controller
                // Session::put('name' , $name);
                 session()->put('name',$name);
                 session()->save();
+                foreach($logf as $a)
+                {
+                    $lf= $a->id;
+                    $petrol=$a->petrol_rs;
+                    $disel=$a->disel_rs;
+                }
+                session()->put('fuel_id',$lf);
+                session()->save();
                 //$request->session()->put('loginid', $login[0]->email);
-                return redirect('/admindash');
+                return view('/dash_fuel',['petrol'=>$petrol,'disel'=>$disel]);
             
         }
         else
@@ -58,4 +69,23 @@ class FuelController extends Controller
             return redirect()->back()->with('status','Username or Password is wrong');
         }
     }
+    public function dash(){
+        $lf=session('fuel_id');
+        $logf=Fuel::where('id',$lf)
+    
+        ->get();
+         if($logf)
+         {
+             
+                 
+                 foreach($logf as $a)
+                 {
+                     
+                     $petrol=$a->petrol_rs;
+                     $disel=$a->disel_rs;
+                 }
+                
+                 //$request->session()->put('loginid', $login[0]->email);
+                 return view('/dash_fuel',['petrol'=>$petrol,'disel'=>$disel]);
+    }}
 }

@@ -2,6 +2,27 @@
 
 
 @section('content')
+<head>
+    <style>
+         .tooltip {
+    display: none;
+    position: relative;
+   
+   
+   
+    
+    
+    width: 300px;
+    color:green;
+    text-align: left;
+}
+.zxc:hover .tooltip {
+  
+   display: block;
+}
+
+    </style>
+</head>
 <x-guest-layout style="margin-top:-10p;">
     <x-auth-card>
     <x-slot name="logo">
@@ -15,7 +36,7 @@
         <x-auth-session-status class="mb-4" :status="session('message')" />
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="/reg_repair" style="margin-top:0;"onSubmit="return myfunction7()">
+        <form method="POST" action="/reg_fuel" style="margin-top:0;"onSubmit="return myfunction7()">
             @csrf
 
             <!-- Name -->
@@ -40,18 +61,20 @@
                 <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
                 <span id="a3"></span>
             </div>
-            
+           
             <!-- PHONE -->
             <div class="mt-4">
+            <div class="zxc"> <span class="tooltip">thisistest</span>
                 <x-label for="place" :value="__('Place')" />
-
-                <select id="place" class="block mt-1 w-full"  name="place" :value="old('place')" required >
-                <option disabled selected>--SELECT A PLACE--</option>
+                
+               
+                <select id="place" class="block mt-1 w-full"  name="place[]" :value="old('place')"multiple required >
+                
                     <option value="kanjirappaly">kanjirappaly</option>
                     <option value="koovappaly">koovappaly</option>
                     <option value="erumely">erumely</option>
                     <option value="mundakayam">mundakayam</option>
-                </select>
+                </select></div>
             </div>
 
 

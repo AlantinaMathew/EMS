@@ -4,41 +4,113 @@
 @section('content')
 
 
+
 <div class="outer">
     <div style="overflow-x: auto;">
-        <table>
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+       
+            @if(count($a)>0)
+            <table>
             <tr>
                 <th>Place</th>
 
                 <th>Location</th>
                 <th>Phone No</th>
 
-                <th>Location</th>
+               
                 <th>Status</th>
+                <th></th>
+                
 
             </tr>
-            @if(count($donor)>0)
-
-            @foreach($donor as $tr)
+            @foreach($a as $tr)
 
             <tr>
                 <td>
                     {{$tr->place}}
                 </td>
                 <td>
+                    {{$tr->location}}
+                </td>
+                <td>
                     {{$tr->phone}}
                 </td>
-                <td>
-                    {{$tr->bloodgrp}}
-                </td>
-                <td>
-                    <a href="https://wa.me/{{$tr->phone}}"><button>call</button></a>
-                </td>
+               
+                @if($tr->status==0)
+                <td>  <button style="background-color:red; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">Declined</button></td>
+                                @elseif($tr->status==1)
+                                <td> <button style="background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+ 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">Pending</button></td>
+
+  <td>
+  <a href="{{ route('decline_ambu', $tr->id) }}"><button style=" background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;"class="btn"><i class="fa fa-close"></i> Decline</button></a>
+
+<a href="{{ route('accept_ambu', $tr->id) }}">
+  <button style="background-color: DodgerBlue;
+  border: none;
+  color: white;
+  margin-left:2px;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;"class="btn"><i class="fa fa-check-square">Accept</i> </button></a>
+  </td>
+
+                                @elseif($tr->status==2)
+                                <td>  <button style="background-color:blueviolet; /* Green */
+  border: none;
+  color: white;
+ 
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">Accepted</button></td>
+  <td><a href="{{ route('cmplt_ambu', $tr->id) }}">
+  <button style="background-color: DodgerBlue;
+  border: none;
+  color: white;
+  margin-left:2px;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;"class="btn"><i class="fa fa-check-square">Mark Complete</i> </button></a></td>
+                                @else
+                                <td>  <button style="background-color:black; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">Completed</button></td>
+                                @endif
+
+                           
+                
             </tr>
             @endforeach
         </table>
 
         @else
+        
         <h1>No Request found </h1>
         @endif
     </div>

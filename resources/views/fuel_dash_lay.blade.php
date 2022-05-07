@@ -96,20 +96,21 @@
             <li>
                 <div class="iocn-link">
                     <a href="#">
-                        <i class='bx bxs-ambulance bx-tada'></i>
-                        <span class="link_name">Ambulance</span>
+                        <i class='bx bx-gas-pump bx-tada'></i>
+                        <span class="link_name ">FuelBuddy</span>
 
                     </a>
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Ambulance</a></li>
+                    <li><a class="link_name" href="#">FuelBudy</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_ambu.php">View Ambulance</a></li>
+                    <li><a href="view_fuel.php">View FuelBudy</a></li>
                     <!-- <li><a href="#">Request</a></li>
                     <li><a href="#">Request History</a></li> -->
                 </ul>
             </li>
+
            
             <hr>
            

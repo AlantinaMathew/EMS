@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2022 at 05:14 AM
+-- Generation Time: May 07, 2022 at 10:30 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -80,7 +80,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2022_05_03_075536_admin', 7),
 (13, '2022_05_03_161905_ambu', 8),
 (14, '2022_05_03_180144_fuel', 9),
-(15, '2022_05_03_180531_repair', 10);
+(15, '2022_05_03_180531_repair', 10),
+(16, '2022_05_05_161924_req_ambu', 11);
 
 -- --------------------------------------------------------
 
@@ -153,7 +154,8 @@ CREATE TABLE `tbl_ambu` (
 --
 
 INSERT INTO `tbl_ambu` (`id`, `email`, `password`, `vehicle_num`, `license_num`, `phone`, `place`, `status`) VALUES
-(17, 'ambu@gmail.com', '12345678', 'DL 01 C AA 1111', '78123456', 9945678823, 'mundakayam', 1);
+(18, 'ambu@gmail.com', '12345678', 'DL 01 C AA 1111', '78123456', 9934567890, 'kanjirappaly', 1),
+(19, 'ambu1@gmail.com', '12345678', 'DL 01 B AA 1111', '12345678', 9947306123, 'kanjirappaly', 1);
 
 -- --------------------------------------------------------
 
@@ -182,7 +184,7 @@ INSERT INTO `tbl_donor` (`id`, `uid`, `dob`, `medlyf`, `weight`, `gender`, `dono
 (12, 12, '2003-05-14', 'No', 67, 'Female', 'Yes', 'O Negative', 1),
 (14, 11, '1986-03-05', 'No', 67, 'Male', 'Yes', 'AB Positive', 1),
 (16, 26, '2001-04-05', 'No', 62, 'Male', 'Yes', 'A Negative', 1),
-(17, 27, '1999-02-26', 'No', 52, 'Male', 'Yes', 'O Negative', 1);
+(17, 27, '1999-02-26', 'Yes', 56, 'Male', 'Yes', 'O Negative', 0);
 
 -- --------------------------------------------------------
 
@@ -196,16 +198,19 @@ CREATE TABLE `tbl_fuel` (
   `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` bigint(15) NOT NULL,
-  `place` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` int(5) NOT NULL DEFAULT 1
+  `place` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(5) NOT NULL DEFAULT 1,
+  `petrol_rs` double(10,4) DEFAULT 0.0000,
+  `disel_rs` decimal(10,4) DEFAULT 0.0000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tbl_fuel`
 --
 
-INSERT INTO `tbl_fuel` (`id`, `name`, `email`, `password`, `phone`, `place`, `status`) VALUES
-(1, 'kanjirappally fuel', 'fuel@gmail.com', '12345678', 9539331911, 'kanjirappaly', 1);
+INSERT INTO `tbl_fuel` (`id`, `name`, `email`, `password`, `phone`, `place`, `status`, `petrol_rs`, `disel_rs`) VALUES
+(1, 'kanjirappally fuel', 'fuel@gmail.com', '12345678', 9539331911, 'kanjirappaly', 1, 0.0000, '0.0000'),
+(4, 'fuels india', 'fuelindia@gmail.com', '12345678', 9934567890, 'kanjirappaly,koovappaly,erumely,mundakayam', 1, 0.0000, '0.0000');
 
 -- --------------------------------------------------------
 
@@ -234,6 +239,29 @@ INSERT INTO `tbl_repair` (`id`, `name`, `email`, `password`, `phone`, `place`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_req_ambu`
+--
+
+CREATE TABLE `tbl_req_ambu` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uid` int(11) NOT NULL,
+  `aid` int(11) NOT NULL,
+  `location` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_req_ambu`
+--
+
+INSERT INTO `tbl_req_ambu` (`id`, `uid`, `aid`, `location`, `created_at`, `updated_at`, `status`) VALUES
+(4, 28, 18, 'near petta kavala', '2022-05-06 23:54:49', '2022-05-07 12:18:58', '2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -248,23 +276,24 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `phone` bigint(20) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
-  `place` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
+  `place` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `phone`, `status`, `place`, `role`) VALUES
-(10, 'aa', 'aaa@gmail.com', '2022-04-07 22:48:50', '$2y$10$Mrhi2eiX44hc/zr.xwB6nugXQh3G9mNqsLR.xpeLTXQNQHwfZBIym', 'Zkeunj6C6d4MickqWEzxSrRqT4J34m3g1r0OPRQSzMD5lchvPQ1ywVNPuO1N', '2022-03-30 22:33:23', '2022-04-07 22:48:50', 1234567890, 1, 'kanjirappaly', ''),
-(11, 'aab', 'aab@gmail.com', NULL, '$2y$10$xYVfdhp8DK1i.ZjqWUwKDeI/gMK7JO5xdN4nJof6ZVRXrCy.HTJoy', NULL, '2022-04-01 12:17:03', '2022-04-01 12:17:03', 1234567890, 1, 'kanjirappaly', ''),
-(12, 'aaab', 'aaab@gmail.com', NULL, '$2y$10$.GuMRKjNCQCr6/Im6yU4MePq/mbnlKLTaweJXkfoRdMddSwHiSNDK', NULL, '2022-04-05 10:38:01', '2022-04-05 10:38:01', 9539331911, 1, 'kanjirappaly', ''),
-(19, 'haloo', 'halo@gmail.com', NULL, '$2y$10$2hjar4ON7pgce0CISyYA.eYbO8bVtJSxFKxI3MEyAdAEcSCl.8wtO', NULL, '2022-04-06 11:04:13', '2022-04-06 11:04:13', 9539331911, 1, 'mundakayam', ''),
-(20, 'jj', 'jj@gmail.com', '2022-04-06 11:26:02', '$2y$10$XsCYrpxXV.lvdQYzPZj1ne9v1QrU9OZ/GPGCJ98Y/O9K/PaPZGIaK', 'Y2hjATlAOyONFpzQxL1bffDDVohnmNiBG3oMYmcbseQH2xymqyGOlTTIqLJs', '2022-04-06 11:09:20', '2022-04-06 11:40:03', 9539331911, 1, 'koovappaly', ''),
-(21, 'hh', 'hh@gmail.com', NULL, '$2y$10$fIAlWDHKlr0keKRYJmASZuAYy7dAYWbJO8Qwy4OdCN.pwX9sV7jLO', NULL, '2022-04-06 11:30:39', '2022-04-06 11:30:39', 1234567890, 1, 'koovappaly', ''),
-(26, 'user', 'user@gmail.com', '2022-04-07 23:06:49', '$2y$10$bjaLLzmEnaHBkfWtZqsS9uFaytXOhF.aLZkX0g1AipNbyv1/T1gbe', NULL, '2022-04-07 23:06:01', '2022-04-07 23:06:49', 8979651255, 1, 'erumely', ''),
-(27, 'user1', 'user1@gm.com', '2022-04-07 23:17:50', '$2y$10$VosMQPGJibaXeFMzj99ZpelRQeq8/YYvq5cSuBfGqHGc8iYL5oSXm', NULL, '2022-04-07 23:17:13', '2022-04-07 23:17:50', 9967556980, 1, 'kanjirappaly', '');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `phone`, `status`, `place`) VALUES
+(10, 'aa', 'aaa@gmail.com', '2022-04-07 22:48:50', '$2y$10$Mrhi2eiX44hc/zr.xwB6nugXQh3G9mNqsLR.xpeLTXQNQHwfZBIym', 'Zkeunj6C6d4MickqWEzxSrRqT4J34m3g1r0OPRQSzMD5lchvPQ1ywVNPuO1N', '2022-03-30 22:33:23', '2022-04-07 22:48:50', 9947306123, 1, 'kanjirappaly'),
+(11, 'aab', 'aab@gmail.com', NULL, '$2y$10$xYVfdhp8DK1i.ZjqWUwKDeI/gMK7JO5xdN4nJof6ZVRXrCy.HTJoy', NULL, '2022-04-01 12:17:03', '2022-04-01 12:17:03', 1234567890, 1, 'kanjirappaly'),
+(12, 'aaab', 'aaab@gmail.com', NULL, '$2y$10$.GuMRKjNCQCr6/Im6yU4MePq/mbnlKLTaweJXkfoRdMddSwHiSNDK', NULL, '2022-04-05 10:38:01', '2022-04-05 10:38:01', 9539331911, 1, 'kanjirappaly'),
+(19, 'haloo', 'halo@gmail.com', NULL, '$2y$10$2hjar4ON7pgce0CISyYA.eYbO8bVtJSxFKxI3MEyAdAEcSCl.8wtO', NULL, '2022-04-06 11:04:13', '2022-04-06 11:04:13', 9539331911, 1, 'mundakayam'),
+(20, 'jj', 'jj@gmail.com', '2022-04-06 11:26:02', '$2y$10$XsCYrpxXV.lvdQYzPZj1ne9v1QrU9OZ/GPGCJ98Y/O9K/PaPZGIaK', 'Y2hjATlAOyONFpzQxL1bffDDVohnmNiBG3oMYmcbseQH2xymqyGOlTTIqLJs', '2022-04-06 11:09:20', '2022-04-06 11:40:03', 9539331911, 1, 'koovappaly'),
+(21, 'hh', 'hh@gmail.com', NULL, '$2y$10$fIAlWDHKlr0keKRYJmASZuAYy7dAYWbJO8Qwy4OdCN.pwX9sV7jLO', NULL, '2022-04-06 11:30:39', '2022-04-06 11:30:39', 1234567890, 1, 'koovappaly'),
+(26, 'user', 'user@gmail.com', '2022-04-07 23:06:49', '$2y$10$bjaLLzmEnaHBkfWtZqsS9uFaytXOhF.aLZkX0g1AipNbyv1/T1gbe', NULL, '2022-04-07 23:06:01', '2022-04-07 23:06:49', 8979651255, 1, 'erumely'),
+(27, 'user1', 'user1@gm.com', '2022-04-07 23:17:50', '$2y$10$VosMQPGJibaXeFMzj99ZpelRQeq8/YYvq5cSuBfGqHGc8iYL5oSXm', NULL, '2022-04-07 23:17:13', '2022-04-07 23:17:50', 9967556980, 1, 'kanjirappaly'),
+(28, 'user2', 'user2@gmail.com', '2022-05-05 10:28:25', '$2y$10$mXWnqtQT3QbKFnyRGtlB0OfWx4PgFb2vfVCw1xoofkwbvZ6bYMdU2', NULL, '2022-05-05 10:24:33', '2022-05-05 10:28:25', 9539331911, 1, 'mundakayam'),
+(29, 'user3', 'user3@gmail.com', NULL, '$2y$10$g18pFw25KhvhPciORnKTTuJCMTkhZTLDmtu6cmKIC71W8YllW7U5q', NULL, '2022-05-05 22:14:00', '2022-05-05 22:14:00', 9947306123, 1, 'erumely');
 
 --
 -- Indexes for dumped tables
@@ -339,6 +368,12 @@ ALTER TABLE `tbl_repair`
   ADD UNIQUE KEY `tbl_repair_email_unique` (`email`);
 
 --
+-- Indexes for table `tbl_req_ambu`
+--
+ALTER TABLE `tbl_req_ambu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -365,7 +400,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -383,7 +418,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_ambu`
 --
 ALTER TABLE `tbl_ambu`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_donor`
@@ -395,7 +430,7 @@ ALTER TABLE `tbl_donor`
 -- AUTO_INCREMENT for table `tbl_fuel`
 --
 ALTER TABLE `tbl_fuel`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_repair`
@@ -404,10 +439,16 @@ ALTER TABLE `tbl_repair`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_req_ambu`
+--
+ALTER TABLE `tbl_req_ambu`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

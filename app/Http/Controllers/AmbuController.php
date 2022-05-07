@@ -36,7 +36,7 @@ class AmbuController extends Controller
         $adduser->place=$request->input('place');
         
         $adduser->save();
-        return redirect('/log_ambu');
+        return view('/ambu_login');
 
      }else{
         return redirect()->back()->with('message','Password should be same');
@@ -52,17 +52,46 @@ class AmbuController extends Controller
 
        $log=Ambu::where('email',$em)
        ->where('password',$ps)
-       ->get(['id']);
+       ->get('id');
         if($login>0)
         {
-            session()->put('ambu_id',$log);
-            session()->save();
+           
+            
                 $name = 'ambulance';
                // Session::put('name' , $name);
                 session()->put('name',$name);
                 session()->save();
+                foreach($log as $a)
+                {
+                    $l= $a->id;
+                }
+                session()->put('ambu_id',$l);
+                session()->save();
                 //$request->session()->put('loginid', $login[0]->email);
-                return redirect('/admindash');
+                $find=Req_ambu::where('aid','=',$l)->where('created_at', '>=', Carbon::now()->subDay())->get();
+                //dd($find);
+               if(count($find)>0){
+                   $sql=Req_ambu::join('tbl_ambu','tbl_ambu.id','=','tbl_req_ambu.aid')
+                   ->join('users','users.id','=','tbl_req_ambu.uid')
+                   ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
+                   ->where('tbl_req_ambu.aid','=',$l)
+                   ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
+                   if($sql){
+                    return view('/dash_ambu',['a'=>$sql]);
+            }else{
+                
+                $find=[];
+                return view('/dash_ambu',['a'=>$find]);
+            } 
+                   
+               }else{
+               
+                $find=[];
+                return view('/dash_ambu',['a'=>$find]);
+               }
+    
+               
+                
             
         }
         else
@@ -84,7 +113,7 @@ class AmbuController extends Controller
         $sql=Ambu::join('tbl_req_ambu','tbl_req_ambu.aid','<>','tbl_ambu.id')
         ->where('tbl_ambu.place','=',$pl)
        ->where('tbl_ambu.status','=','1')
-       
+       ->where('tbl_req_ambu.status','<>','2')
         ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
         
         ->get(['tbl_ambu.id','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone','tbl_ambu.email']);
@@ -134,14 +163,51 @@ public function req_ambu1(){
        die();      
 }
 public function dash(){
-    $id=session('ambu_id');
-    $find=Req_ambu::where('aid','=',$id)->where('created_at', '>=', Carbon::now()->subDay())->where('status', '=', 1)->count();
-    if($find>0){
-
-    }
+    $l=session('ambu_id');
+    $find=Req_ambu::where('aid','=',$l)->where('created_at', '>=', Carbon::now()->subDay())->get();
+                //dd($find);
+               if(count($find)>0){
+                   $sql=Req_ambu::join('tbl_ambu','tbl_ambu.id','=','tbl_req_ambu.aid')
+                   ->join('users','users.id','=','tbl_req_ambu.uid')
+                   ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
+                   ->where('tbl_req_ambu.aid','=',$l)
+                   ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
+                   if($sql){
+                    return view('/dash_ambu',['a'=>$sql]);
+            }else{
+                $b="failed";
+                $find=[];
+                return view('/dash_ambu',['a'=>$find,'b'=>$b]);
+            } 
+                   
+               }else{
+                $b="utter failed";
+                $find=[];
+                return view('/dash_ambu',['a'=>$find,'b'=>$b]);
+               }
 }
 
-
-
+public function req_decline_ambu($id){
+    $update= Req_ambu::where('id','=',$id)->first();
+    $update->status=0;
+    $update->updated_at=Carbon::now();
+    $update->save();
+    return $this->dash();
+}
+public function req_accept_ambu($id){
+    $update= Req_ambu::where('id','=',$id)->first();
+    $update->status=2;
+    $update->updated_at=Carbon::now();
+    $update->save();
+    return $this->dash();
+}
+public function req_cmplt_ambu($id){
+    $update= Req_ambu::where('id','=',$id)->first();
+    $update->status=3;
+    $update->updated_at=Carbon::now();
+    $update->save();
+    return $this->dash();
+   
+}
 }
    
