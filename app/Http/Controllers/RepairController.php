@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Repair;
+use App\Models\User;
+use App\Models\Req_repair;
+use App\Models\Rep_loc;
+use App\Models\Rep_service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -25,15 +30,32 @@ class RepairController extends Controller
         $adduser->name=$request->input('name');
         $adduser->email=$request->input('email');
         $adduser->phone=$request->input('phone');
-        $adduser->place=$request->input('place');
+       
         $adduser->password=$request->input('password');
         $adduser->save();
-        return redirect('/log_rep');
+
+        $id=$adduser->id;
+        foreach($request->input('place') as $a){
+             $addloc=new Rep_loc();
+             $addloc->rid=$id;
+             $addloc->place=$a;
+             $addloc->save();
+        }
+        foreach($request->input('service') as $a){
+            $addloc=new Rep_service();
+            $addloc->rid=$id;
+            $addloc->service=$a;
+            $addloc->save();
+       }
+        return view('/repair_login');
     }else{
         return redirect()->back()->with('message','Password should be same');
     }
-}
+   
     }
+    }
+      
+    
     public function log(Request $request){
         $em=$request->input('email');
         $ps=$request->input('password');

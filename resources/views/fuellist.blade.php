@@ -258,7 +258,7 @@ a{
 <div class="header">
   <a href="#default" class="logo"><span class="logo_name">
 
-<img src="images/lg.png" width="260" height="90" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
+<img src="/images/lg.png" width="260" height="90" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
 
 </span></a>
 @if (Route::has('login'))
@@ -373,56 +373,69 @@ a{
     <div class="out">
     
         <div class="c" style="background:white;">
-        <marquee style="color:green;">Order Fuel For Rs 550/-(500 for fuel + 50 for transportation charge)</marquee>
-            <form action="/search_fuel" method="POST"onsubmit="return sub();">
-            @csrf
-                <div class="row">
-                    <div class="col-25">
-                        <label for="City">City</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="place" id="b" style="width:100%;" required>
-                            <option disabled selected>--SELECT A CITY--</option>
-                            <option value="kanjirappaly">kanjirappaly</option>
-                            <option value="koovappaly">koovappaly</option>
-                            <option value="erumely">erumely</option>
-                            <option value="mundakayam">mundakayam</option>
+        <x-auth-session-status class="mb-4" :status="session('statusn')" />
+    @if(count($a)>0)
+        <table>
+        <tr>
+        <th>Name</th>
+                <th>Place</th>
+                <th>Fuel</th>
+                <th>Price</th>
 
 
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="City">Fuel</label>
-                    </div>
-                    <div class="col-75">
-                        <select name="fuel" id="c" style="width:100%;" required>
-                            <option disabled selected>--SELECT A Fuel--</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Diesel">Diesel</option>
-                            
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="col-25">
-                            <label for="Location">Location</label>
-                        </div>
-                        <div class="col-75">
-                            <textarea id="location" name="location" placeholder="Write Location.." style="height:200px"required></textarea>
-                        </div>
-                    </div>
-
-
+                <th>Phone No</th>
 
                
-                <div class="row">
-                    <input type="submit" name="sbt_fuel" value="Search">
+                <th>Send Request</th>
+
+            </tr>
 
 
-                </div>
-            </form>
+            @foreach($a as $tr)
+           
+            <tr>
+                <td>
+                    {{$tr->name}}
+                </td>
+                <td>
+                {{$tr->place}}
+                </td>
+               
+                
+                    @if($fuel=='Petrol')
+                        <td>{{$fuel}}</td>
+                        <td> {{$tr->petrol_rs}} </td>
+                    @else
+                        <td><td>{{$fuel}}</td></td>
+                        <td>  {{$tr->diesl_rs}} </td>
+                    @endif
+
+                
+               
+                
+                <td>
+                    {{$tr->phone}}
+                </td> 
+               
+                <td>
+                <a href="{{ route('reqf', $tr->id) }}">
+
+                    <button type="button" style="background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">Send Request</button></a>
+                </td>
+            </tr>
+            @endforeach
+        </table>
+
+@else
+<h1>No Ambulance found </h1>
+@endif
         </div>
     </div>
 </body>

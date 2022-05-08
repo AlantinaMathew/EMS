@@ -2,6 +2,27 @@
 
 
 @section('content')
+<head>
+    <style>
+         .tooltip {
+    display: none;
+    position: relative;
+   
+   
+   
+    
+    
+    width: 300px;
+    color:green;
+    text-align: left;
+}
+.zxc:hover .tooltip {
+  
+   display: block;
+}
+
+    </style>
+</head>
 <x-guest-layout style="margin-top:-10p;">
     <x-auth-card>
     <x-slot name="logo">
@@ -41,17 +62,31 @@
                 <span id="a3"></span>
             </div>
             
-            <!-- PHONE -->
             <div class="mt-4">
+            <div class="zxc"> <span class="tooltip">Press Cntrl to select multiple option </span>
                 <x-label for="place" :value="__('Place')" />
-
-                <select id="place" class="block mt-1 w-full"  name="place" :value="old('place')" required >
-                <option disabled selected>--SELECT A PLACE--</option>
+                
+               
+                <select id="place" class="block mt-1 w-full"  name="place[]" :value="old('place')"multiple required >
+                
                     <option value="kanjirappaly">kanjirappaly</option>
                     <option value="koovappaly">koovappaly</option>
                     <option value="erumely">erumely</option>
                     <option value="mundakayam">mundakayam</option>
-                </select>
+                </select></div>
+            </div>
+            <div class="mt-4">
+            <div class="zxc"> <span class="tooltip">Press Cntrl to select multiple option </span>
+                <x-label for="place" :value="__('Service')" />
+                
+               
+                <select id="service" class="block mt-1 w-full"  name="service[]" :value="old('service')"multiple required >
+                
+                    <option value="Two Wheeler">Two Wheeler</option>
+                    <option value="Three Wheeler">Three Wheeler</option>
+                    <option value="Four Wheeler">Four Wheeler</option>
+                    
+                </select></div>
             </div>
 
 

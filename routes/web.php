@@ -59,6 +59,10 @@ Route::get('/decline/{id}', [AmbuController::class, 'req_decline_ambu']) -> name
 Route::get('/accept/{id}', [AmbuController::class, 'req_accept_ambu']) -> name('accept_ambu');
 Route::get('/complete/{id}', [AmbuController::class, 'req_cmplt_ambu']) -> name('cmplt_ambu');
 
+Route::get('/decline/{id}', [FuelController::class, 'req_decline_fuel']) -> name('decline_fuel');
+Route::get('/accept/{id}', [FuelController::class, 'req_accept_fuel']) -> name('accept_fuel');
+Route::get('/complete/{id}', [FuelController::class, 'req_cmplt_fuel']) -> name('cmplt_fuel');
+
 Route::get('/log_fuel', function () {
     return view('fuel_login');
 });
@@ -68,8 +72,9 @@ Route::POST('/fuellog',[FuelController::class, 'log']);
 Route::post('/update_petrol',[FuelController::class, 'petrol']);
 Route::post('/update_disel',[FuelController::class, 'disel']);
 
-
-
+Route::post('/search_fuel',[FuelController::class, 'fuelbuddy']);
+Route::get('/request/{id}', [FuelController::class, 'req_fuel']) -> name('reqf');
+Route::get('/req_fuel', [FuelController::class, 'req_fuel1']);
 Route::get('/log_rep', function () {
     return view('repair_login');
 });

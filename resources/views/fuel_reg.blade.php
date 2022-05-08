@@ -64,7 +64,7 @@
            
             <!-- PHONE -->
             <div class="mt-4">
-            <div class="zxc"> <span class="tooltip">thisistest</span>
+            <div class="zxc"> <span class="tooltip">Press Cntrl to select multiple option </span>
                 <x-label for="place" :value="__('Place')" />
                 
                

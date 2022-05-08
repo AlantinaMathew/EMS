@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_req_ambu', function (Blueprint $table) {
+        Schema::create('tbl_req_fuel', function (Blueprint $table) {
             $table->id();
             
            // $table->integer('phone');
             $table->integer('uid');
-            $table->integer('aid');
+            $table->integer('fid');
+            $table->integer('place');
             $table->integer('location');
+            $table->integer('price');
             $table->timestamps();
             $table->string('status');
             
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_req_ambu');
+        //
     }
 };

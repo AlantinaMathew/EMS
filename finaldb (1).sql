@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2022 at 10:30 PM
+-- Generation Time: May 08, 2022 at 09:43 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -52,6 +52,35 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fuel_loc`
+--
+
+CREATE TABLE `fuel_loc` (
+  `id` int(10) NOT NULL,
+  `fid` int(10) NOT NULL,
+  `place` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `fuel_loc`
+--
+
+INSERT INTO `fuel_loc` (`id`, `fid`, `place`) VALUES
+(1, 1, 'kanjirappaly'),
+(2, 4, 'kanjirappaly'),
+(3, 4, 'erumely'),
+(4, 8, 'kanjirappaly'),
+(5, 8, 'koovappaly'),
+(6, 8, 'erumely'),
+(7, 8, 'mundakayam'),
+(8, 9, 'koovappaly'),
+(9, 9, 'mundakayam'),
+(10, 10, 'kanjirappaly'),
+(11, 10, 'mundakayam');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -81,7 +110,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2022_05_03_161905_ambu', 8),
 (14, '2022_05_03_180144_fuel', 9),
 (15, '2022_05_03_180531_repair', 10),
-(16, '2022_05_05_161924_req_ambu', 11);
+(16, '2022_05_05_161924_req_ambu', 11),
+(17, '2022_05_08_130215_req_fuel', 12);
 
 -- --------------------------------------------------------
 
@@ -112,6 +142,42 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rep_loc`
+--
+
+CREATE TABLE `rep_loc` (
+  `id` int(11) NOT NULL,
+  `rid` int(11) NOT NULL,
+  `place` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rep_loc`
+--
+
+INSERT INTO `rep_loc` (`id`, `rid`, `place`) VALUES
+(1, 1, 'kanjirappaly'),
+(2, 2, 'koovappaly'),
+(3, 4, 'kanjirappaly'),
+(4, 4, 'koovappaly'),
+(5, 4, 'erumely'),
+(6, 4, 'mundakayam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rep_service`
+--
+
+CREATE TABLE `rep_service` (
+  `id` int(10) NOT NULL,
+  `rid` int(10) NOT NULL,
+  `service` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -198,9 +264,8 @@ CREATE TABLE `tbl_fuel` (
   `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` bigint(15) NOT NULL,
-  `place` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(5) NOT NULL DEFAULT 1,
-  `petrol_rs` double(10,4) DEFAULT 0.0000,
+  `petrol_rs` decimal(10,4) DEFAULT 0.0000,
   `disel_rs` decimal(10,4) DEFAULT 0.0000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -208,9 +273,12 @@ CREATE TABLE `tbl_fuel` (
 -- Dumping data for table `tbl_fuel`
 --
 
-INSERT INTO `tbl_fuel` (`id`, `name`, `email`, `password`, `phone`, `place`, `status`, `petrol_rs`, `disel_rs`) VALUES
-(1, 'kanjirappally fuel', 'fuel@gmail.com', '12345678', 9539331911, 'kanjirappaly', 1, 0.0000, '0.0000'),
-(4, 'fuels india', 'fuelindia@gmail.com', '12345678', 9934567890, 'kanjirappaly,koovappaly,erumely,mundakayam', 1, 0.0000, '0.0000');
+INSERT INTO `tbl_fuel` (`id`, `name`, `email`, `password`, `phone`, `status`, `petrol_rs`, `disel_rs`) VALUES
+(1, 'kanjirappally fuel', 'fuel@gmail.com', '12345678', 9539331911, 1, '10.0000', '0.0000'),
+(4, 'fuels india', 'fuelindia@gmail.com', '12345678', 9934567890, 1, '110.7800', '105.5000'),
+(8, 'fuel2', 'fuel2@gmail.com', '12345678', 8899776600, 1, '110.7800', '0.0000'),
+(9, 'fuel3', 'fuel3@gmail.co', '12345678', 7755997744, 1, '110.7800', '0.0000'),
+(10, 'fuel1', 'fuel1@gmail.com', '12345678', 7788990023, 1, '110.7800', '0.0000');
 
 -- --------------------------------------------------------
 
@@ -224,7 +292,6 @@ CREATE TABLE `tbl_repair` (
   `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` bigint(15) NOT NULL,
-  `place` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(5) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -232,9 +299,10 @@ CREATE TABLE `tbl_repair` (
 -- Dumping data for table `tbl_repair`
 --
 
-INSERT INTO `tbl_repair` (`id`, `name`, `email`, `password`, `phone`, `place`, `status`) VALUES
-(1, 'repair kjprly', 'rep@mec.in', '12345678', 7755669944, 'kanjirappaly', 1),
-(2, 'repair kvply', 'rep1@mec.in', '12345678', 7755669944, 'koovappaly', 1);
+INSERT INTO `tbl_repair` (`id`, `name`, `email`, `password`, `phone`, `status`) VALUES
+(1, 'repair kjprly', 'rep@mec.in', '12345678', 7755669944, 1),
+(2, 'repair kvply', 'rep1@mec.in', '12345678', 7755669944, 1),
+(4, 'Repair All India', 'repairindia@gmail.com', '12345678', 9988776655, 1);
 
 -- --------------------------------------------------------
 
@@ -258,6 +326,32 @@ CREATE TABLE `tbl_req_ambu` (
 
 INSERT INTO `tbl_req_ambu` (`id`, `uid`, `aid`, `location`, `created_at`, `updated_at`, `status`) VALUES
 (4, 28, 18, 'near petta kavala', '2022-05-06 23:54:49', '2022-05-07 12:18:58', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_req_fuel`
+--
+
+CREATE TABLE `tbl_req_fuel` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uid` int(11) NOT NULL,
+  `fid` int(11) NOT NULL,
+  `place` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fuel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` decimal(10,4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tbl_req_fuel`
+--
+
+INSERT INTO `tbl_req_fuel` (`id`, `uid`, `fid`, `place`, `location`, `fuel`, `price`, `created_at`, `updated_at`, `status`) VALUES
+(4, 28, 8, 'koovappaly', 'near ajce', 'Petrol', '110.7800', '2022-05-08 12:07:46', '2022-05-08 13:35:07', '3');
 
 -- --------------------------------------------------------
 
@@ -313,6 +407,12 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `fuel_loc`
+--
+ALTER TABLE `fuel_loc`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -331,6 +431,18 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `rep_loc`
+--
+ALTER TABLE `rep_loc`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rep_service`
+--
+ALTER TABLE `rep_service`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_admin`
@@ -374,6 +486,12 @@ ALTER TABLE `tbl_req_ambu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_req_fuel`
+--
+ALTER TABLE `tbl_req_fuel`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -397,16 +515,34 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `fuel_loc`
+--
+ALTER TABLE `fuel_loc`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rep_loc`
+--
+ALTER TABLE `rep_loc`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `rep_service`
+--
+ALTER TABLE `rep_service`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -430,18 +566,24 @@ ALTER TABLE `tbl_donor`
 -- AUTO_INCREMENT for table `tbl_fuel`
 --
 ALTER TABLE `tbl_fuel`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_repair`
 --
 ALTER TABLE `tbl_repair`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_req_ambu`
 --
 ALTER TABLE `tbl_req_ambu`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_req_fuel`
+--
+ALTER TABLE `tbl_req_fuel`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
