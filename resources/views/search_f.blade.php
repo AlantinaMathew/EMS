@@ -108,32 +108,7 @@
                 </div>
 
 
-                <!-- <div class="row">
-                    <div class="col-25">
-                        <label for="Bloodgrp">Blood Group</label>
-                    </div>
-                    <div class="col-75">
-
-                        <select name="bloodgrp" id="c" style="width:100%;" required>
-                            <option disabled selected>SELECT BLOOD GROUP</option>
-                            <option value="A Positive">A Positive</option>
-                            <option value="A Negative">A Negative</option>
-
-                            <option value="B Positive">B Positive</option>
-                            <option value="B Negative">B Negative</option>
-
-                            <option value="AB Positive">AB Positive</option>
-                            <option value="AB Negative">AB Negative</option>
-
-                            <option value="O Positive">O Positive</option>
-                            <option value="O Negative">O Negative</option>
-
-
-
-                        </select>
-
-                    </div>
-                </div> -->
+               
                 <div class="row">
                     <input type="submit" name="sbt_donor" value="Search">
 

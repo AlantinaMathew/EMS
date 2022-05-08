@@ -65,6 +65,9 @@ Route::get('/log_fuel', function () {
 Route::view('/fuel', 'fuel_reg');
 Route::POST('/reg_fuel',[FuelController::class, 'reg']);
 Route::POST('/fuellog',[FuelController::class, 'log']);
+Route::post('/update_petrol',[FuelController::class, 'petrol']);
+Route::post('/update_disel',[FuelController::class, 'disel']);
+
 
 
 Route::get('/log_rep', function () {

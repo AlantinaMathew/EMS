@@ -88,4 +88,25 @@ class FuelController extends Controller
                  //$request->session()->put('loginid', $login[0]->email);
                  return view('/dash_fuel',['petrol'=>$petrol,'disel'=>$disel]);
     }}
+    public function petrol(Request $request){
+        echo "abhbkjbkjb";
+        $lf=session('fuel_id');
+
+        //echo($aa);
+        $price=$request->input('petrol');
+       $update=Fuel::where('id',$lf)->first();
+       $update->petrol_rs=$price;
+       $update->save();
+     return $this->dash();
+    }
+    public function disel(Request $request){
+        echo "abhbkjbkjb";
+        $lf=session('fuel_id');
+        $price=$request->input('disel');
+       
+        $update=Fuel::where('id','=',$lf)->first();
+        $update->disel_rs=$price;
+        $update->save();
+    return $this->dash();
+    }
 }
