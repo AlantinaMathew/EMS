@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
@@ -18,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 
-    input[type=text],
+input[type=text],
     select,
     textarea {
         width: 100%;
@@ -246,6 +245,86 @@ a{
             text-align: center;
             background-color: #f1f1f1;
         }
+    
+
+    input[type=text],
+    select,
+    textarea {
+        width: 100%;
+        padding: 14px;
+        margin-top: 1em;
+        border: 1px solid #5995fd;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    input[type=submit] {
+        background-color: #5995fd;
+        color: white;
+        margin-top: 2em;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+
+    input[type=submit]:hover {
+        background-color: #5995fd;
+
+    }
+
+    .c {
+
+        border-radius: 5px;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        align-items: center;
+    }
+
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .out {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 8em;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+
+        .col-25,
+        .col-75,
+        input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+    
     </style>
     <script>
         if (window.history.replaceState) {
@@ -267,8 +346,8 @@ a{
   @auth
   <a href="/">Home</a>
   <a href="/about">About Us</a>
-  <a href="/search_a">Find Ambulance</a>
-  <a href="/req_ambu">Ambulance Request</a>
+  <a href="/search_r">Find GoMechanic</a>
+  <a href="/req_rep">Mechanic Request</a>
   <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
   <div class="dropdown-content">
@@ -287,14 +366,18 @@ a{
 </div>
 
 
-<div class="outer">
-    <div style="overflow-x: auto;"><x-auth-session-status class="mb-4" :status="session('statusn')" />
+<body>
+    <div class="out">
+    
+        <div class="c" style="background:white;">
+        <x-auth-session-status class="mb-4" :status="session('statusn')" />
     @if(count($a)>0)
         <table>
         <tr>
-        <th>Email</th>
+              <th>Name</th>
                 <th>Place</th>
-                <th>Vehicle No</th>
+                
+                <th>Service</th>
 
 
                 <th>Phone No</th>
@@ -309,21 +392,26 @@ a{
            
             <tr>
                 <td>
-                    {{$tr->email}}
+                    {{$tr->name}}
                 </td>
                 <td>
                 {{$tr->place}}
                 </td>
-                <td>
-                    
-                    {{$tr->vehicle_num}}
-                </td>
+               
+                
+                   
+                        <td> {{$tr->service}} </td>
+                  
+
+                
+               
+                
                 <td>
                     {{$tr->phone}}
-                </td>
+                </td> 
                
                 <td>
-                <a href="{{ route('reqa', $tr->id) }}">
+                <a href="{{ route('reqr', $tr->id) }}">
 
                     <button type="button" style="background-color: #4CAF50; /* Green */
   border: none;
@@ -339,10 +427,8 @@ a{
         </table>
 
 @else
-<h1>No Ambulance found </h1>
+<h1>No Mechanic found </h1>
 @endif
-
+        </div>
     </div>
-</div>
 </body>
-</html>

@@ -48,16 +48,17 @@ Route::POST('/reg_ambu',[AmbuController::class, 'reg']);
 Route::get('/dash_ambu', [AmbuController::class, 'dash']);
 Route::get('/dash_fuel', [FuelController::class, 'dash']);
 
-Route::get('/request/{id}', [AmbuController::class, 'req_ambu']) -> name('req');
+
+Route::get('/reqa/{id}', [AmbuController::class, 'req_ambu']) -> name('reqa');
 //Route::POST('/req_ambu',[AmbuController::class, 'req']);
 Route::POST('/ambulog',[AmbuController::class, 'log']);
 Route::POST('/search_ambu',[AmbuController::class, 'ambulist']);
 Route::POST('/admin',[AdminController::class, 'log']);
 Route::get('/req_ambu',[AmbuController::class, 'req_ambu1']);
 
-Route::get('/decline/{id}', [AmbuController::class, 'req_decline_ambu']) -> name('decline_ambu');
-Route::get('/accept/{id}', [AmbuController::class, 'req_accept_ambu']) -> name('accept_ambu');
-Route::get('/complete/{id}', [AmbuController::class, 'req_cmplt_ambu']) -> name('cmplt_ambu');
+Route::get('/decline1/{id}', [AmbuController::class, 'req_decline_ambu']) -> name('decline_ambu');
+Route::get('/accept1/{id}', [AmbuController::class, 'req_accept_ambu']) -> name('accept_ambu');
+Route::get('/complete1/{id}', [AmbuController::class, 'req_cmplt_ambu']) -> name('cmplt_ambu');
 
 Route::get('/decline/{id}', [FuelController::class, 'req_decline_fuel']) -> name('decline_fuel');
 Route::get('/accept/{id}', [FuelController::class, 'req_accept_fuel']) -> name('accept_fuel');
@@ -73,14 +74,17 @@ Route::post('/update_petrol',[FuelController::class, 'petrol']);
 Route::post('/update_disel',[FuelController::class, 'disel']);
 
 Route::post('/search_fuel',[FuelController::class, 'fuelbuddy']);
-Route::get('/request/{id}', [FuelController::class, 'req_fuel']) -> name('reqf');
+Route::get('/reqf/{id}', [FuelController::class, 'req_fuel']) -> name('reqf');
 Route::get('/req_fuel', [FuelController::class, 'req_fuel1']);
 Route::get('/log_rep', function () {
     return view('repair_login');
 });
 Route::view('/rep', 'repair_reg');
 Route::POST('/reg_rep',[RepairController::class, 'reg']);
+Route::get('/req_rep',[RepairController::class, 'req_rep1']);
 Route::POST('/replog',[RepairController::class, 'log']);
-
+Route::get('/dash_rep', [RepairController::class, 'dash']);
+Route::post('/search_repair',[RepairController::class, 'GoMech']);
+Route::get('/request/{id}', [RepairController::class, 'req_rep']) -> name('reqr');
 Route::post('/registerdonor',[MainController::class, 'registerdonor']);
 require __DIR__.'/auth.php';

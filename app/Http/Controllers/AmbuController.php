@@ -117,14 +117,11 @@ class AmbuController extends Controller
         ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
         
         ->get(['tbl_ambu.id','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone','tbl_ambu.email']);
+        return view('/ambulist',['a'=>$sql]);
             }else{
                 $sql=Ambu::where('place','=',$pl)
                     ->where('status','=','1')->get();
-                if($sql)
-                    {
-                        return view('/ambulist',['a'=>$sql]);
-                    
-                    }  
+                    return view('/ambulist',['a'=>$sql]);  
                 }
 
                 }

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class req_repair extends Model
 {
     use HasFactory;
+    protected $table = 'tbl_req_rep';
 }

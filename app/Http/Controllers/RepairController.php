@@ -41,11 +41,11 @@ class RepairController extends Controller
              $addloc->place=$a;
              $addloc->save();
         }
-        foreach($request->input('service') as $a){
-            $addloc=new Rep_service();
-            $addloc->rid=$id;
-            $addloc->service=$a;
-            $addloc->save();
+        foreach($request->input('service') as $b){
+            $addser=new Rep_service();
+            $addser->rid=$id;
+            $addser->service=$b;
+            $addser->save();
        }
         return view('/repair_login');
     }else{
@@ -62,6 +62,9 @@ class RepairController extends Controller
        $login=Repair::where('email',$em)
        ->where('password',$ps)
        ->count();
+       $logf=Repair::where('email',$em)
+       ->where('password',$ps)
+       ->get();
         if($login>0)
         {
             
@@ -69,8 +72,15 @@ class RepairController extends Controller
                // Session::put('name' , $name);
                 session()->put('name',$name);
                 session()->save();
+                foreach($logf as $a)
+                {
+                    $lf= $a->id;
+                   
+                }
+                session()->put('rep_id',$lf);
+                session()->save();
                 //$request->session()->put('loginid', $login[0]->email);
-                return redirect('/admindash');
+                return $this->dash();
             
         }
         else
@@ -80,4 +90,124 @@ class RepairController extends Controller
             return redirect()->back()->with('status','Username or Password is wrong');
         }
     }
+
+    public function dash(){
+        $lf=session('rep_id');
+
+                
+                $find=Req_repair::where('rid','=',$lf)->where('created_at', '>=', Carbon::now()->subDay())->get();
+                            //dd($find);
+            if(count($find)>0){
+                $sql=Req_repair::join('tbl_repair','tbl_repair.id','=','tbl_req_rep.rid')
+                ->join('users','users.id','=','tbl_req_rep.uid')
+                ->where('tbl_req_rep.created_at', '>=', Carbon::now()->subDay())
+                ->where('tbl_req_rep.rid','=',$lf)
+                ->get(['tbl_req_rep.location','tbl_req_rep.status','tbl_req_rep.id','tbl_req_rep.place','tbl_req_rep.service','users.phone']);
+                //dd($sql);
+                if($sql){
+
+                    return view('/dash_rep',['a'=>$sql]);
+            }else{
+                $b="failed";
+                $find=[];
+               return view('/dash_rep',['a'=>$find,'b'=>$b]);
+            } 
+                
+            }else{
+                $b="utter failed";
+                $find=[];
+                
+                return view('/dash_rep',['a'=>$find,'b'=>$b]);
+            }
+            
+            }
+
+             public function GoMech(Request $request){
+             $userID=auth()->user()->id;
+                
+            $service=$request->input('vehicle');
+                
+            $place=$request->input('place');
+                
+            session(['rep_loc' => $request->input('location')]);
+               session(['rep_place' => $request->input('place')]);
+             session(['rep_service' => $request->input('vehicle')]);
+        
+            //     // $sql=Fuel::where('place', 'like',$place)
+            //     //     ->where('petrol_rs', '<>',NULL)
+            //     //     ->get(['id']);
+            //     //     dd($sql);
+               
+
+                    $find=Req_repair::where('uid',$userID)
+                    ->where('tbl_req_rep.created_at', '>=', Carbon::now()->subDay())->count();
+                    if($find>0){
+                           
+                            $sql=Repair::join('tbl_req_rep','tbl_req_rep.rid','<>','tbl_repair.id')
+                            ->join('rep_loc','rep_loc.rid', '=','tbl_repair.id')
+                            ->join('rep_service','rep_service.rid', '=','tbl_repair.id')
+                            ->where('rep_loc.place', '=',$place)
+                           ->where('tbl_repair.status','=','1')
+                           ->where('rep_service.service','=',$service)
+                            ->where('tbl_req_rep.created_at', '>=', Carbon::now()->subDay())
+                            
+                            ->get(['tbl_repair.id','rep_loc.place','rep_service.service','tbl_repair.phone','tbl_repair.name']);
+                  }else{
+                      
+                        $sql=Repair::join('rep_loc','rep_loc.rid', '=','tbl_repair.id')
+                        ->join('rep_service','rep_service.rid', '=','tbl_repair.id')
+                        ->where('rep_loc.place', '=',$place)
+                        ->where('tbl_repair.status','=','1')
+                        ->where('rep_service.service','=',$service)->get(['tbl_repair.id','rep_loc.place','rep_service.service','tbl_repair.phone','tbl_repair.name']);
+                        
+                    }
+                        if($sql)
+                            {
+                                return view('/replist',['a'=>$sql]);
+                               
+                            }  
+                        
+                
+                  }
+         public function req_rep($id){
+           $location= session('rep_loc');
+            $place=session('rep_place');
+          $service=session('rep_service');
+     
+            
+           
+            
+            $userID=auth()->user()->id;
+    
+           
+            
+            $sql=new Req_repair();
+            $sql->uid=$userID;
+            $sql->rid=$id;
+            $sql->place=$place;
+            $sql->location=$location;
+            $sql->service=$service;
+           
+            $sql->status=1;
+            $sql->save();
+            return $this->req_rep1();
+    
+                  
+    }
+    public function req_rep1(){
+            
+        $userID=auth()->user()->id;
+    
+       
+    
+    
+        $find=Req_repair::join('tbl_repair','tbl_req_rep.rid','=','tbl_repair.id')
+        ->where('tbl_req_rep.uid','=',$userID)
+        ->where('created_at', '>=', Carbon::now()->subDay())
+        ->get(['tbl_req_rep.location','tbl_req_rep.status','tbl_req_rep.place','tbl_req_rep.service','tbl_repair.phone','tbl_repair.name']);
+       
+            return view('/req_rep',['a'=>$find]);
+           die();      
+    }
+        
 }

@@ -406,8 +406,8 @@ a{
                         <td>{{$fuel}}</td>
                         <td> {{$tr->petrol_rs}} </td>
                     @else
-                        <td><td>{{$fuel}}</td></td>
-                        <td>  {{$tr->diesl_rs}} </td>
+                        <td>{{$fuel}}</td>
+                        <td>  {{$tr->disel_rs}} </td>
                     @endif
 
                 
@@ -418,7 +418,7 @@ a{
                 </td> 
                
                 <td>
-                <a href="{{ route('reqf', $tr->id) }}">
+                <a href="{{url('reqf', $tr->id) }}">
 
                     <button type="button" style="background-color: #4CAF50; /* Green */
   border: none;

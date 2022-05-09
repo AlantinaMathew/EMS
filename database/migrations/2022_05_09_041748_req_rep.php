@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_req_fuel', function (Blueprint $table) {
+        Schema::create('tbl_req_rep', function (Blueprint $table) {
             $table->id();
             
            // $table->integer('phone');
             $table->integer('uid');
-            $table->integer('fid');
+            $table->integer('rid');
             $table->integer('place');
             $table->integer('location');
-            $table->integer('price');
+           
+            $table->integer('service');
             $table->timestamps();
             $table->string('status');
             
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_req_fuel');
+        Schema::dropIfExists('tbl_req_rep');
     }
 };

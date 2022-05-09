@@ -72,7 +72,7 @@ class FuelController extends Controller
                 session()->put('fuel_id',$lf);
                 session()->save();
                 //$request->session()->put('loginid', $login[0]->email);
-                return view('/dash_fuel',['petrol'=>$petrol,'disel'=>$disel]);
+                return $this->dash();
             
         }
         else
@@ -98,10 +98,10 @@ class FuelController extends Controller
                     
                     //$request->session()->put('loginid', $login[0]->email);
                     
-        }
-        
-        $find=Req_fuel::where('fid','=',$lf)->where('created_at', '>=', Carbon::now()->subDay())->get();
-                    //dd($find);
+                    }
+                    
+                    $find=Req_fuel::where('fid','=',$lf)->where('created_at', '>=', Carbon::now()->subDay())->get();
+                                //dd($find);
                 if(count($find)>0){
                     $sql=Req_fuel::join('tbl_fuel','tbl_fuel.id','=','tbl_req_fuel.fid')
                     ->join('users','users.id','=','tbl_req_fuel.uid')
@@ -177,8 +177,11 @@ class FuelController extends Controller
                    ->where('tbl_fuel.petrol_rs','<>',0.00)
                     ->where('tbl_req_fuel.created_at', '>=', Carbon::now()->subDay())
                     
-                    ->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.petrol_rs','tbl_fuel.phone','tbl_fuel.name']);
+                    ->distinct(['tbl_fuel.id'])->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.petrol_rs','tbl_fuel.phone','tbl_fuel.name']);
+                    //dd($sql);
+                     return view('/fuellist',['a'=>$sql,'fuel'=>$fuel]);
                    }else{
+                    $fuel='Diesel';
                     $sql=Fuel::join('tbl_req_fuel','tbl_req_fuel.fid','<>','tbl_fuel.id')
                     ->join('fuel_loc','fuel_loc.fid', '=','tbl_fuel.id')
                     ->where('fuel_loc.place', '=',$place)
@@ -186,27 +189,34 @@ class FuelController extends Controller
                    ->where('tbl_fuel.disel_rs','<>',0.00)
                     ->where('tbl_req_fuel.created_at', '>=', Carbon::now()->subDay())
                     
-                    ->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.disel_rs','tbl_fuel.phone','tbl_fuel.name']);
+                    ->distinct(['tbl_fuel.id'])->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.disel_rs','tbl_fuel.phone','tbl_fuel.name']);
+                    return view('/fuellist',['a'=>$sql,'fuel'=>$fuel]);
                    }
-
+            //   if($sql)
+            //         {
+            //             
+                       
+            //         }  
             }else{
                 if($fuel=='Petrol'){
                 $sql=Fuel::join('fuel_loc','fuel_loc.fid', '=','tbl_fuel.id')
                 ->where('fuel_loc.place', '=',$place)
                         ->where('tbl_fuel.petrol_rs', '<>',0.00)
-                        ->where('tbl_fuel.status','=','1')->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.petrol_rs','tbl_fuel.phone','tbl_fuel.name']);
-                }else{
+                        ->where('tbl_fuel.status','=','1')
+                        ->distinct(['tbl_fuel.id'])->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.petrol_rs','tbl_fuel.phone','tbl_fuel.name']);
+                        return view('/fuellist',['a'=>$sql,'fuel'=>$fuel]);
+                    }else{
                     $sql=Fuel::join('fuel_loc','fuel_loc.fid', '=','tbl_fuel.id')
                    ->where('fuel_loc.place', '=',$place)
                         ->where('tbl_fuel.disel_rs', '<>',0.00)
-                        ->where('tbl_fuel.status','=','1')->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.disel_rs','tbl_fuel.phone','tbl_fuel.name']);
-                }
-            }
-                if($sql)
-                    {
+                        ->where('tbl_fuel.status','=','1')
+                        ->distinct(['tbl_fuel.id'])->get(['tbl_fuel.id','fuel_loc.place','tbl_fuel.disel_rs','tbl_fuel.phone','tbl_fuel.name']);
                         return view('/fuellist',['a'=>$sql,'fuel'=>$fuel]);
-                       
-                    }  
+                    }
+               
+           
+            }
+               
                 
         
           }
@@ -226,7 +236,7 @@ class FuelController extends Controller
                 $price1=Fuel::where('id','=',$id)->get(['disel_rs']);
                 foreach($price1 as $a)
             {
-                $price= $a->petrol_rs;
+                $price= $a->disel_rs;
             }  
             }
             
