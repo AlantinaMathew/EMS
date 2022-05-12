@@ -268,7 +268,7 @@ class FuelController extends Controller
         $find=Req_fuel::join('tbl_fuel','tbl_req_fuel.fid','=','tbl_fuel.id')
         ->where('tbl_req_fuel.uid','=',$userID)
         ->where('created_at', '>=', Carbon::now()->subDay())
-        ->get(['tbl_req_fuel.location','tbl_req_fuel.status','tbl_req_fuel.place','tbl_req_fuel.fuel','tbl_req_fuel.price','tbl_fuel.phone','tbl_fuel.name']);
+        ->get(['tbl_req_fuel.location','tbl_req_fuel.status','tbl_req_fuel.place','tbl_req_fuel.fuel','tbl_req_fuel.price','tbl_req_fuel.id','tbl_fuel.phone','tbl_fuel.name']);
        
             return view('/req_fuel',['a'=>$find]);
            die();      

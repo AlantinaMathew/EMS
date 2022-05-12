@@ -4,10 +4,42 @@ namespace App\Http\Controllers;
 use App\Models\DonorReg;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 class MainController extends Controller
 {
+
+  public static function pswd(Request $request){
+    
+    $userID=auth()->user()->id;
+    $find=  User::where('id',$userID)
+    ->get();
+
+    //dd($find);
+  echo($find);
+    //dd($find);
+    // if($find){
+    //   // $update=  User::where('id',$userID)->first();
+      // $update->password =Hash::make($request->input('password1'));
+      // $update->save();
+     
+      // if($update){
+        
+      //   return view('/change_password');
+      //   die();
+      // }else{
+       
+      //   return redirect()->back()->with('message','Error!!Try again');
+      // }
+      
+  // }else{
+    
+  //   //$sql=  DonorReg::where('uid','=',$userID)->get();
+  //    return redirect()->back()->with('message','Password is Incorrect');
+  // }
+    
+  }
 
     public function registerdonor(Request $request) {
         //dd($request);

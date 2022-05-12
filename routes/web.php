@@ -7,6 +7,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AmbuController;
 use App\Http\Controllers\FuelController;
 use App\Http\Controllers\RepairController;
+use App\Http\Controllers\RazorpayController;
+
+use App\Http\Controllers\RazorpayPaymentController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,13 +35,17 @@ Route::view('/search_a', 'search_a');
 Route::view('/search_f', 'search_f');
 Route::view('/search_r', 'search_r');
 Route::view('/dash', 'dash');
-Route::view('/admindash', 'admindash');
+
+Route::view('/pswd', 'change_password');
+Route::view('/admindash', 'admindash'); 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','verified'])->name('dashboard');
 
 Route::POST('/search_donor',[MainController::class, 'searchdonor']);
+Route::POST('/chng_pswd',[MainController::class, 'pswd']);
+
 Route::get('/search_d',[MainController::class, 'check_reg_donor']);
 Route::get('/regdonor', [MainController::class, 'check_reg_donor1']);
 Route::get('/view_d',[MainController::class, 'check_reg_donor2']);
@@ -51,7 +61,7 @@ Route::get('/dash_fuel', [FuelController::class, 'dash']);
 
 Route::get('/reqa/{id}', [AmbuController::class, 'req_ambu']) -> name('reqa');
 //Route::POST('/req_ambu',[AmbuController::class, 'req']);
-Route::POST('/ambulog',[AmbuController::class, 'log']);
+Route::POST('/ambulog',[AmbuController::class, 'log']); 
 Route::POST('/search_ambu',[AmbuController::class, 'ambulist']);
 Route::POST('/admin',[AdminController::class, 'log']);
 Route::get('/req_ambu',[AmbuController::class, 'req_ambu1']);
@@ -87,4 +97,12 @@ Route::get('/dash_rep', [RepairController::class, 'dash']);
 Route::post('/search_repair',[RepairController::class, 'GoMech']);
 Route::get('/request/{id}', [RepairController::class, 'req_rep']) -> name('reqr');
 Route::post('/registerdonor',[MainController::class, 'registerdonor']);
+
+Route::get('/success', [RazorpayPaymentController::class,'success']);
+Route::post('/payment', [RazorpayPaymentController::class,'payment']);
+Route::view('/paym','pay');
+Route::get('/ho/{id}', [RazorpayPaymentController::class,'index'])->name('hom');
+Route::post('/pay' , [RazorpayPaymentController::class,'pay']);
+Route::get('/error' ,[RazorpayPaymentController::class,'error']);
+
 require __DIR__.'/auth.php';

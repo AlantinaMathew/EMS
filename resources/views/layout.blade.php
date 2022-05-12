@@ -186,6 +186,7 @@ a{
   @auth
   <a href="/">Home</a>
   <a href="/about">About Us</a>
+  
 
   <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>

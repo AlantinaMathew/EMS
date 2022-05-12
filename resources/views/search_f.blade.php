@@ -268,7 +268,7 @@ a{
   <a href="/">Home</a>
   <a href="/about">About Us</a>
   <a href="/search_f">Find FuelBuddy</a>
-  <a href="/req_fuel">Ambulance Request</a>
+  <a href="/req_fuel">Request Find</a>
   <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
   <div class="dropdown-content">

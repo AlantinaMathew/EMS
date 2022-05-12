@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-auth-card>
-    <img src="images/lg.png" width="260" height="90" style=" display: block;
+    <img src="/images/lg.png" width="260" height="90" style=" display: block;
   margin-left: auto;
   margin-right: auto;
   width: 90%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />

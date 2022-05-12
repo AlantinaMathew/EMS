@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
-<html lang="en" dir="ltr">
-
-<head>
-    <meta charset="UTF-8">
-    <title>EMERGENO
-    </title>
-    <link rel="stylesheet" href="style/style3.css">
+<link rel="stylesheet" href="/style/style3.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -14,7 +7,10 @@
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Razorpay</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <style>
     input[type=text],
     select,
@@ -328,15 +324,9 @@
         }
     }
     </style>
-    <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
-    </script>
-</head>
-
+  </head>
 <body>
-    <div class="header">
+<div class="header">
         <a href="#default" class="logo"><span class="logo_name">
 
                 <img src="/images/lg.png" width="260" height="90"
@@ -368,15 +358,19 @@
         @endif
     </div>
 
-    <div class="out">
-
-
-        @if(count($a)>0)
+    <div class="out"style="margin-left:6em;">
 
 
 
-        @foreach($a as $tr)
-        <div class="c" style="background:white;justify-content:center;">
+    <div class="container mt-1 col-9 mx-auto pt-7">
+
+       
+        <form method="post" action="/payment">
+          @csrf
+          <div class="c" style="background:white;justify-content:center;">
+            @if(count($a)>0)
+            @foreach($a as $tr)
+        
             
                 <div class="row">
                     <div class="col-25">
@@ -386,127 +380,67 @@
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="City">Place</label>
+                        <label for="City">Phone</label>
                     </div>
-                    <div class="col-75">{{$tr->place}} </div>
+                    <div class="col-75">{{$tr->phone}} </div>
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="Location">Location</label>
+                        <label for="City">Fuel</label>
                     </div>
-                    <div class="col-75">{{$tr->location}}</div>
+                    <div class="col-75">{{$tr->fuel}} </div>
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="Location">Fuel</label>
+                        <label for="City">Price (Per L)</label>
                     </div>
-                    <div class="col-75">{{$tr->fuel}}</div>
+                    <div class="col-75">{{$tr->price}} </div>
                 </div>
-                <div class="row">
+                
+            @endforeach
+            @endif
+            <div class="row">
                     <div class="col-25">
-                        <label for="Location">Price</label>
+                        <label for="City">Amount to be pay</label>
                     </div>
-                    <div class="col-75">{{$tr->price}}</div>
+                    <div class="col-75"><input type="text"name="amount"style="width:90%"></div>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="Location">Phone No</label>
-                    </div>
-                    <div class="col-75">{{$tr->phone}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="Location">Status</label>
-                    </div>
-                    <div class="col-75">
-                        @if($tr->status==0)
-                        <td> <button style="background-color:red; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Declined</button></td>
-                        @elseif($tr->status==1)
-                        <td> <button style="background-color:orange; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
+            <button type="submit" class="btn btn-primary btn-block">Submit</button><br><br>
+          </form>
+
+
+    
+    @if(Session::has('data'))
  
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Pending</button></td>
-
-
-                        @elseif($tr->status==2)
-                        <td> <button style="background-color:blueviolet; /* Green */
-  border: none;
-  color: white;
- 
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Accepted</button></td>
-
-                        @else
-                      <td>
-                          <form action="{{route('hom',$tr->id)}}" method="get">
-                          <button style="background-color:darkorchid; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Pay</button></form> 
-
-                            
-
-
-                            @endif
-
-                    </div>
-                </div>
-        </div>
-
-
-
+    <div class="container tex-center">
+    <form action="/pay" method="POST" class="text-center mx-auto mt-5">
+        @csrf
+      <script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          data-key="rzp_test_6XNw6qGWoVVmvg"
         
-        @if(Session::has('data'))
- 
- <div class="container tex-center mx-auto">
- <form action="/pay" method="POST" class="text-center mx-auto mt-5">
-     @csrf
-   <script
-       src="https://checkout.razorpay.com/v1/checkout.js"
-       data-key="rzp_test_6XNw6qGWoVVmvg"
- data-amount=550 
-       data-currency="INR"
- data-order_id="{{Session::get('data.order_id')}}"
-       data-buttontext="Pay with Razorpay"
-       data-name="Coffee"
-       data-description="Test transaction"
-      
-       data-theme.color="#F37254"
-   ></script>
-   <input type="hidden" custom="Hidden Element" name="hidden">
-   </form>
+    data-amount="{{Session::get('data.amount')}}"
+          data-currency="INR"
+    data-order_id="{{Session::get('data.order_id')}}"
+          data-buttontext="Pay with Razorpay"
+          data-name="Fuel"
+          data-description="pay amount"
+         
+          data-theme.color="#528FF0"
+      ></script>
+      <input type="hidden" custom="Hidden Element" name="hidden">
+      </form>
 
- </div>
- 
- @endif
     </div>
-    @endforeach
-
-
-    @else
-    <h1>No FuelBuddies found </h1>
+    
     @endif
+    </div>
+        
+
+
 
 
     </div>
 
 </body>
+</html>
