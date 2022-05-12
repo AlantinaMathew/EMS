@@ -110,6 +110,10 @@ class RazorpayPaymentController extends Controller
         
     if($success){
         $user->save();
+        $rid=session('pay_req_id');
+        $sql=Req_fuel::where('id','=',$rid)->first();
+        $sql->status=4;
+        $sql->save();
         return redirect('success');
     }else{
 

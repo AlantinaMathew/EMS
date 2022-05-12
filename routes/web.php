@@ -8,11 +8,7 @@ use App\Http\Controllers\AmbuController;
 use App\Http\Controllers\FuelController;
 use App\Http\Controllers\RepairController;
 use App\Http\Controllers\RazorpayController;
-
 use App\Http\Controllers\RazorpayPaymentController;
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +53,32 @@ Route::view('/ambu', 'ambu_reg');
 Route::POST('/reg_ambu',[AmbuController::class, 'reg']);
 Route::get('/dash_ambu', [AmbuController::class, 'dash']);
 Route::get('/dash_fuel', [FuelController::class, 'dash']);
+
+
+// Route::get('/pp', function () {
+//     // return view('invoice');
+
+//     $pdf = PDF::loadView('invoice');
+//     return $pdf->download('invoice.pdf');
+
+// })->name('bill');
+
+Route::get('/pp', function () {
+    // return view('invoice');
+    
+    $pdf = PDF::loadView('invoice')->setOptions(['defaultFont' => 'sans-serif']);
+    return $pdf->download('invoice.pdf');
+
+})->name('invoice');;
+
+Route::get('/invoice-pdf', function () {
+    // return view('invoice-pdf');
+
+    $pdf = PDF::loadView('invoice-pdf')->setOptions(['defaultFont' => 'sans-serif']);
+    return $pdf->download('invoice.pdf');
+});
+
+
 
 
 Route::get('/reqa/{id}', [AmbuController::class, 'req_ambu']) -> name('reqa');
@@ -104,5 +126,6 @@ Route::view('/paym','pay');
 Route::get('/ho/{id}', [RazorpayPaymentController::class,'index'])->name('hom');
 Route::post('/pay' , [RazorpayPaymentController::class,'pay']);
 Route::get('/error' ,[RazorpayPaymentController::class,'error']);
+
 
 require __DIR__.'/auth.php';

@@ -16,7 +16,11 @@
 
         <h2>Your payment has been processed</h2>
 
-        <a class="btn btn-info" href="/">Back </a> 
+        <a class="btn btn-info" href="/">Back </a> <br><br>
+        <form method="GET" action="{{ URL::route('invoice') }}">@csrf
+        <button type="submit" class="btn btn-info">Download receipt</button><br><br>
+          </form>
+        
 
     </div>
 

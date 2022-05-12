@@ -451,7 +451,7 @@
   display: inline-block;
   font-size: 16px;">Accepted</button></td>
 
-                        @else
+                 @elseif($tr->status==3)
                       <td>
                           <form action="{{route('hom',$tr->id)}}" method="get">
                           <button style="background-color:darkorchid; /* Green */
@@ -464,7 +464,21 @@
   font-size: 16px;">Pay</button></form> 
 
                             
+                      </td>
+                      @else
+                      <td>
+                          
+                          <button style="background-color:darkorchid; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;">Paid</button>
 
+                            
+                      </td>
 
                             @endif
 

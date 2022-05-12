@@ -96,16 +96,15 @@
             <li>
                 <div class="iocn-link">
                     <a href="#">
-                        <i class='bx bxs-ambulance bx-tada'></i>
-                        <span class="link_name">Ambulance</span>
-
+                        <i class='bx bxs-car-mechanic bx-tada'></i>
+                        <span class="link_name">Ready Repair</span>
                     </a>
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Ambulance</a></li>
+                    <li><a class="link_name" href="#">Ready Repair</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_ambu.php">View Ambulance</a></li>
+                    <li><a href="view_repair.php">View Members</a></li>
                     <!-- <li><a href="#">Request</a></li>
                     <li><a href="#">Request History</a></li> -->
                 </ul>
@@ -149,15 +148,12 @@
                 </div>
             </div>
         </nav>
-        </section>
-        <section>
 
-        <!-- @yield('content'); -->
-        </section>
+        @yield('content'); 
         
 
+    </section>
     
-        
     <script>
     let arrow = document.querySelectorAll(".arrow");
     for (var i = 0; i < arrow.length; i++) {
