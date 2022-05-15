@@ -58,7 +58,7 @@
   font-size: 16px;">Pending</button></td>
 
   <td>
-  <!-- <a href="{{ route('decline_fuel', $tr->id) }}"> -->
+<a href="{{ route('decline_rep', $tr->id) }}"> 
       <button style=" background-color:red;
   border: none;
   color: white;
@@ -66,7 +66,7 @@
   font-size: 16px;
   cursor: pointer;"class="btn"><i class="fa fa-close"></i> Decline</button></a>
 
-<!-- <a href="{{ route('accept_fuel', $tr->id) }}"> -->
+ <a href="{{ route('accept_rep', $tr->id) }}"> 
   <button style="background-color: DodgerBlue;
   border: none;
   color: white;
@@ -86,7 +86,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;">Accepted</button></td>
-  <td><!-- <a href="{{ route('cmplt_fuel', $tr->id) }}"> -->
+  <td><a href="{{ route('cmplt_rep', $tr->id) }}">
   <button style="background-color: DodgerBlue;
   border: none;
   color: white;

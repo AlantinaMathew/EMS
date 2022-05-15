@@ -105,7 +105,11 @@ class AmbuController extends Controller
     public function ambulist(Request $request){
         $userID=auth()->user()->id;
         $pl=$request->input('place');
+       
         session(['ambu_loc' => $request->input('location')]);
+        session(['latitude' => $request->input('lat')]);
+        session(['longitude' => $request->input('lng')]);
+        session(['crnt' => $request->input('chk')]);
         $find=Req_ambu::where('uid',$userID)
         ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())->count();
        if($find>0){
@@ -117,11 +121,11 @@ class AmbuController extends Controller
         ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
         
         ->get(['tbl_ambu.id','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone','tbl_ambu.email']);
-        return view('/ambulist',['a'=>$sql]);
+       return view('/ambulist',['a'=>$sql]);
             }else{
                 $sql=Ambu::where('place','=',$pl)
                     ->where('status','=','1')->get();
-                    return view('/ambulist',['a'=>$sql]);  
+                   return view('/ambulist',['a'=>$sql]);  
                 }
 
                 }
@@ -130,10 +134,16 @@ class AmbuController extends Controller
         $userID=auth()->user()->id;
 
         $loc=session('ambu_loc');
+        $latitude=session('latitude');
+        $longitude=session('longitude');
+        $c=session('crnt'); 
         $sql=new Req_ambu();
         $sql->uid=$userID;
         $sql->aid=$id;
         $sql->location=$loc;
+        $sql->longitude=$longitude;
+        $sql->latitude= $latitude;
+        $sql->crnt_loc=$c;
         $sql->status=1;
         $sql->save();
     

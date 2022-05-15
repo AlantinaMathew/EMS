@@ -311,14 +311,28 @@ a{
                 </div>
                 <div class="row">
                         <div class="col-25">
+                            <label for="Location">Use Current Location</label>
+                        </div>
+                        <div class="col-75"><br>
+                        
+              <input type="checkbox" name="chk" id="chk" value="0"style=" width: 40px;
+            height: 40px;background-color: #eee;"> 
+            
+  
+                        </div>
+                    </div>
+                <div class="row">
+                        <div class="col-25">
                             <label for="Location">Location</label>
                         </div>
                         <div class="col-75">
                             <textarea id="location" name="location" placeholder="Write Location.." style="height:200px"required></textarea>
                         </div>
                     </div>
+                <input type="hidden" id="longitude" name="lat" value="76.789436">
+                <input type="hidden" id="latitude" name="lng" value="9.557270">
                 <div class="row">
-                    <input type="submit" name="sbt_donor" value="Search">
+                    <input type="submit" id="ambu" name="sbt_donor" value="Search">
 
 
                 </div>
@@ -327,18 +341,7 @@ a{
         
     </div>
 </body>
-<script>
-    function sub(){
-       
-// var a=document.getElementById('c');
- var b=document.getElementById('b');
  
-if(b.selectedIndex <=0 ){
-    alert("Select all the fields");
-    return false;
-}else{
-    //alert("");
-    return true;
-}
-    }
-</script>
+   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="js/counter.js"></script>

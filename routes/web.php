@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\CarMoved;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MainController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\FuelController;
 use App\Http\Controllers\RepairController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\RazorpayPaymentController;
+use Illuminate\Support\Facades\Broadcast;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,9 +99,16 @@ Route::get('/decline/{id}', [FuelController::class, 'req_decline_fuel']) -> name
 Route::get('/accept/{id}', [FuelController::class, 'req_accept_fuel']) -> name('accept_fuel');
 Route::get('/complete/{id}', [FuelController::class, 'req_cmplt_fuel']) -> name('cmplt_fuel');
 
-Route::get('/log_fuel', function () {
-    return view('fuel_login');
-});
+
+Route::get('/decline2/{id}', [RepairController::class, 'req_decline_rep']) -> name('decline_rep');
+Route::get('/accept2/{id}', [RepairController::class, 'req_accept_rep']) -> name('accept_rep');
+Route::get('/complete2/{id}', [RepairController::class, 'req_cmplt_rep']) -> name('cmplt_rep');
+
+
+Route::view('/user','user');
+
+Route::view('/log_fuel','fuel_login');
+
 Route::view('/fuel', 'fuel_reg');
 Route::POST('/reg_fuel',[FuelController::class, 'reg']);
 Route::POST('/fuellog',[FuelController::class, 'log']);

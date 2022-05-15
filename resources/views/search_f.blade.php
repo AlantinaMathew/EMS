@@ -355,7 +355,7 @@ a{
         align-items: center;
         margin-top: 8em;
     }
-
+  
     /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 600px) {
 
@@ -405,12 +405,13 @@ a{
                         </select>
                     </div>
                 </div>
+                
                 <div class="row">
                         <div class="col-25">
-                            <label for="Location">Location</label>
+                            <label for="Location">LandMark</label>
                         </div>
                         <div class="col-75">
-                            <textarea id="location" name="location" placeholder="Write Location.." style="height:200px"required></textarea>
+                            <textarea id="location" name="location" placeholder="Write LandMark.." style="height:150px"required></textarea>
                         </div>
                     </div>
 
@@ -425,4 +426,5 @@ a{
             </form>
         </div>
     </div>
+
 </body>

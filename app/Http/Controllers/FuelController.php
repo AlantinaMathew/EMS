@@ -274,28 +274,28 @@ class FuelController extends Controller
            die();      
     }
  
- 
-public function req_decline_fuel($id){
-    $update= Req_Fuel::where('id','=',$id)->first();
-    $update->status=0;
-    $update->updated_at=Carbon::now();
-    $update->save();
-    return $this->dash();
-}
-public function req_accept_fuel($id){
-    $update= Req_Fuel::where('id','=',$id)->first();
-    $update->status=2;
-    $update->updated_at=Carbon::now();
-    $update->save();
-    return $this->dash();
-}
-public function req_cmplt_fuel($id){
-    $update= Req_Fuel::where('id','=',$id)->first();
-    $update->status=3;
-    $update->updated_at=Carbon::now();
-    $update->save();
-    return $this->dash();
-   
-}
+        
+        public function req_decline_fuel($id){
+            $update= Req_Fuel::where('id','=',$id)->first();
+            $update->status=0;
+            $update->updated_at=Carbon::now();
+            $update->save();
+            return $this->dash();
+        }
+        public function req_accept_fuel($id){
+            $update= Req_Fuel::where('id','=',$id)->first();
+            $update->status=2;
+            $update->updated_at=Carbon::now();
+            $update->save();
+            return $this->dash();
+        }
+        public function req_cmplt_fuel($id){
+            $update= Req_Fuel::where('id','=',$id)->first();
+            $update->status=3;
+            $update->updated_at=Carbon::now();
+            $update->save();
+            return $this->dash();
+        
+        }
 
 }

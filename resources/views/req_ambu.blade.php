@@ -384,7 +384,7 @@
 
 
                         @else
-                        <h1>No Ambulance found </h1>
+                        <h1>No Request found </h1>
                         @endif
 
                     </div>

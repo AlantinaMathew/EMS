@@ -7,9 +7,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Stevebauman\Location\Facades\Location;
 class MainController extends Controller
 {
 
+  
   public static function pswd(Request $request){
     
     $userID=auth()->user()->id;
