@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2022 at 08:58 PM
+-- Generation Time: May 16, 2022 at 09:18 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -158,7 +158,8 @@ INSERT INTO `payments` (`id`, `req_id`, `uid`, `fid`, `amount`, `payment_id`, `r
 (40, 13, 28, 9, 900, 'order_JUNaQtBaVMapln', 'pay_JUNeidaQULTStC', 1, '2022-05-12 10:48:34', '2022-05-12 10:52:49'),
 (41, 13, 28, 9, 550, 'order_JUO9yeQKhFWaLV', NULL, 0, '2022-05-12 11:22:12', '2022-05-12 11:22:12'),
 (42, 13, 28, 9, 300, 'order_JUOAEMwkziPlbt', 'pay_JUOAd2aHTWynp4', 1, '2022-05-12 11:22:26', '2022-05-12 11:22:54'),
-(43, 15, 28, 4, 550, 'order_JUPIAjs7hlNhnq', 'pay_JUPIrkq3h5Eu35', 1, '2022-05-12 12:28:39', '2022-05-12 12:29:24');
+(43, 15, 28, 4, 550, 'order_JUPIAjs7hlNhnq', 'pay_JUPIrkq3h5Eu35', 1, '2022-05-12 12:28:39', '2022-05-12 12:29:24'),
+(44, 17, 29, 9, 550, 'order_JV2uuVwt18DqDY', 'pay_JV2vLt0dN7xtsp', 1, '2022-05-14 03:14:23', '2022-05-14 03:14:55');
 
 -- --------------------------------------------------------
 
@@ -263,7 +264,7 @@ CREATE TABLE `tbl_ambu` (
 
 INSERT INTO `tbl_ambu` (`id`, `email`, `password`, `vehicle_num`, `license_num`, `phone`, `place`, `status`) VALUES
 (18, 'ambu@gmail.com', '12345678', 'DL 01 C AA 1111', '78123456', 9934567890, 'kanjirappaly', 1),
-(19, 'ambu1@gmail.com', '12345678', 'DL 01 B AA 1111', '12345678', 9947306123, 'erumely', 1);
+(19, 'ambu1@gmail.com', '12345678', 'DL 01 B AA 1111', '12345678', 9947306123, 'koovappally', 1);
 
 -- --------------------------------------------------------
 
@@ -290,7 +291,7 @@ CREATE TABLE `tbl_donor` (
 INSERT INTO `tbl_donor` (`id`, `uid`, `dob`, `medlyf`, `weight`, `gender`, `donor`, `bloodgrp`, `status`) VALUES
 (6, 10, '2000-06-13', 'No', 76, 'Female', 'Yes', 'B Positive', 1),
 (12, 12, '2003-05-14', 'No', 67, 'Female', 'Yes', 'O Negative', 1),
-(14, 11, '1986-03-05', 'No', 67, 'Male', 'Yes', 'AB Positive', 1),
+(14, 11, '1986-03-05', 'No', 67, 'Male', 'Yes', 'A Positive', 1),
 (16, 26, '2001-04-05', 'No', 62, 'Male', 'Yes', 'A Negative', 1),
 (17, 27, '1999-02-26', 'Yes', 56, 'Male', 'Yes', 'O Negative', 0);
 
@@ -318,7 +319,7 @@ CREATE TABLE `tbl_fuel` (
 INSERT INTO `tbl_fuel` (`id`, `name`, `email`, `password`, `phone`, `status`, `petrol_rs`, `disel_rs`) VALUES
 (1, 'kanjirappally fuel', 'fuel@gmail.com', '12345678', 9539331911, 1, '109.0000', '105.0000'),
 (4, 'fuels india', 'fuelindia@gmail.com', '12345678', 9934567890, 1, '110.7800', '105.5000'),
-(8, 'fuel2', 'fuel2@gmail.com', '12345678', 8899776600, 1, '115.0000', '105.0000'),
+(8, 'fuel2', 'fuel2@gmail.com', '12345678', 8899776600, 1, '112.8800', '105.0000'),
 (9, 'fuel3', 'fuel3@gmail.co', '12345678', 7755997744, 1, '110.7800', '105.0000'),
 (10, 'fuel1', 'fuel1@gmail.com', '12345678', 7788990023, 1, '110.7800', '105.0000');
 
@@ -355,24 +356,13 @@ CREATE TABLE `tbl_req_ambu` (
   `uid` int(11) NOT NULL,
   `aid` int(11) NOT NULL,
   `location` varchar(110) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `longitude` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `crnt_loc` int(6) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `tbl_req_ambu`
---
-
-INSERT INTO `tbl_req_ambu` (`id`, `uid`, `aid`, `location`, `created_at`, `updated_at`, `status`) VALUES
-(4, 28, 18, 'near petta kavala', '2022-05-06 23:54:49', '2022-05-07 12:18:58', '2'),
-(5, 29, 19, 'h', '2022-05-09 01:11:15', '2022-05-09 01:11:15', '1'),
-(6, 29, 18, 'jj', '2022-05-09 01:57:12', '2022-05-09 01:57:12', '1'),
-(7, 29, 18, 'j', '2022-05-09 02:41:17', '2022-05-09 04:05:55', '3'),
-(8, 30, 18, 'near', '2022-05-09 03:09:39', '2022-05-09 03:09:58', '3'),
-(9, 30, 18, 'dff', '2022-05-09 04:02:22', '2022-05-09 04:02:22', '1'),
-(10, 30, 18, 'dd', '2022-05-09 04:04:00', '2022-05-09 04:04:00', '1'),
-(11, 28, 18, 'jj', '2022-05-10 22:38:01', '2022-05-10 22:38:01', '1');
 
 -- --------------------------------------------------------
 
@@ -386,6 +376,9 @@ CREATE TABLE `tbl_req_fuel` (
   `fid` int(11) NOT NULL,
   `place` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `location` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `crnt_loc` int(10) NOT NULL DEFAULT 0,
+  `longitude` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fuel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` decimal(10,4) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
@@ -397,14 +390,8 @@ CREATE TABLE `tbl_req_fuel` (
 -- Dumping data for table `tbl_req_fuel`
 --
 
-INSERT INTO `tbl_req_fuel` (`id`, `uid`, `fid`, `place`, `location`, `fuel`, `price`, `created_at`, `updated_at`, `status`) VALUES
-(4, 28, 8, 'koovappaly', 'near ajce', 'Petrol', '110.7800', '2022-05-08 12:07:46', '2022-05-09 03:03:58', '2'),
-(8, 29, 1, 'kanjirappaly', 'jj', 'Petrol', '10.0000', '2022-05-09 01:39:00', '2022-05-09 01:39:00', '1'),
-(9, 29, 4, 'kanjirappaly', 'jj', 'Petrol', '110.7800', '2022-05-09 01:47:11', '2022-05-09 01:55:50', '2'),
-(10, 29, 4, 'erumely', 'jj', 'Diesel', '105.5000', '2022-05-09 01:53:34', '2022-05-09 01:55:53', '0'),
-(11, 30, 8, 'erumely', 'hh', 'Petrol', '110.7800', '2022-05-09 04:07:51', '2022-05-09 04:07:51', '1'),
-(13, 28, 9, 'koovappaly', 'near amal jyothi college', 'Petrol', '110.7800', '2022-05-11 15:09:56', '2022-05-11 15:13:48', '4'),
-(15, 28, 4, 'kanjirappaly', 'nn', 'Petrol', '110.7800', '2022-05-12 10:46:17', '2022-05-12 12:29:24', '4');
+INSERT INTO `tbl_req_fuel` (`id`, `uid`, `fid`, `place`, `location`, `crnt_loc`, `longitude`, `latitude`, `fuel`, `price`, `created_at`, `updated_at`, `status`) VALUES
+(30, 31, 1, 'kanjirappaly', 'hh', 1, '9.557270', '76.789436', 'Petrol', '109.0000', '2022-05-16 13:43:36', '2022-05-16 13:43:36', '1');
 
 -- --------------------------------------------------------
 
@@ -418,6 +405,9 @@ CREATE TABLE `tbl_req_rep` (
   `rid` int(11) NOT NULL,
   `place` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `location` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `crnt_loc` int(10) NOT NULL DEFAULT 0,
+  `longitude` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `service` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
@@ -428,11 +418,8 @@ CREATE TABLE `tbl_req_rep` (
 -- Dumping data for table `tbl_req_rep`
 --
 
-INSERT INTO `tbl_req_rep` (`id`, `uid`, `rid`, `place`, `location`, `service`, `created_at`, `updated_at`, `status`) VALUES
-(4, 28, 5, 'kanjirappaly', 'near petta jn', 'Two Wheeler', '2022-05-09 00:09:23', '2022-05-09 00:09:23', 1),
-(5, 29, 5, 'koovappaly', 'hh', 'Three Wheeler', '2022-05-09 01:09:44', '2022-05-09 01:09:44', 1),
-(6, 30, 5, 'koovappaly', 'jj', 'Two Wheeler', '2022-05-09 04:08:18', '2022-05-09 04:08:18', 1),
-(7, 28, 5, 'koovappaly', 'kk', 'Two Wheeler', '2022-05-10 22:41:10', '2022-05-10 22:41:10', 1);
+INSERT INTO `tbl_req_rep` (`id`, `uid`, `rid`, `place`, `location`, `crnt_loc`, `longitude`, `latitude`, `service`, `created_at`, `updated_at`, `status`) VALUES
+(9, 31, 5, 'erumely', 'k', 1, '19.1266', '73.0136', 'Two Wheeler', '2022-05-16 06:32:15', '2022-05-16 06:32:15', 1);
 
 -- --------------------------------------------------------
 
@@ -460,7 +447,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `phone`, `status`, `place`) VALUES
 (10, 'aa', 'aaa@gmail.com', '2022-04-07 22:48:50', '$2y$10$Mrhi2eiX44hc/zr.xwB6nugXQh3G9mNqsLR.xpeLTXQNQHwfZBIym', 'Zkeunj6C6d4MickqWEzxSrRqT4J34m3g1r0OPRQSzMD5lchvPQ1ywVNPuO1N', '2022-03-30 22:33:23', '2022-04-07 22:48:50', 9947306123, 1, 'kanjirappaly'),
-(11, 'aab', 'aab@gmail.com', NULL, '$2y$10$xYVfdhp8DK1i.ZjqWUwKDeI/gMK7JO5xdN4nJof6ZVRXrCy.HTJoy', NULL, '2022-04-01 12:17:03', '2022-04-01 12:17:03', 1234567890, 1, 'kanjirappaly'),
+(11, 'aab', 'aab@gmail.com', NULL, '$2y$10$xYVfdhp8DK1i.ZjqWUwKDeI/gMK7JO5xdN4nJof6ZVRXrCy.HTJoy', NULL, '2022-04-01 12:17:03', '2022-04-01 12:17:03', 7356816868, 1, 'kanjirappaly'),
 (12, 'aaab', 'aaab@gmail.com', NULL, '$2y$10$.GuMRKjNCQCr6/Im6yU4MePq/mbnlKLTaweJXkfoRdMddSwHiSNDK', NULL, '2022-04-05 10:38:01', '2022-04-05 10:38:01', 9539331911, 1, 'kanjirappaly'),
 (19, 'haloo', 'halo@gmail.com', NULL, '$2y$10$2hjar4ON7pgce0CISyYA.eYbO8bVtJSxFKxI3MEyAdAEcSCl.8wtO', NULL, '2022-04-06 11:04:13', '2022-04-06 11:04:13', 9539331911, 1, 'mundakayam'),
 (20, 'jj', 'jj@gmail.com', '2022-04-06 11:26:02', '$2y$10$XsCYrpxXV.lvdQYzPZj1ne9v1QrU9OZ/GPGCJ98Y/O9K/PaPZGIaK', 'Y2hjATlAOyONFpzQxL1bffDDVohnmNiBG3oMYmcbseQH2xymqyGOlTTIqLJs', '2022-04-06 11:09:20', '2022-04-06 11:40:03', 9539331911, 1, 'koovappaly'),
@@ -469,7 +456,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (27, 'user1', 'user1@gm.com', '2022-04-07 23:17:50', '$2y$10$VosMQPGJibaXeFMzj99ZpelRQeq8/YYvq5cSuBfGqHGc8iYL5oSXm', NULL, '2022-04-07 23:17:13', '2022-04-07 23:17:50', 9967556980, 1, 'kanjirappaly'),
 (28, 'user2', 'user2@gmail.com', '2022-05-05 10:28:25', '$2y$10$t4G/LY90msoQ2EAYCX/Qa.LffW9pr.j9YvqhKpOLLwykPIh5qutEu', 'pQPkhdY3UUppyLYY8zWKNrJx3Qfax8xsUGYawmdderUv8fUNzSMJJqYCm98o', '2022-05-05 10:24:33', '2022-05-11 03:54:54', 9539331911, 1, 'mundakayam'),
 (29, 'user3', 'user3@gmail.com', '2022-05-09 00:27:54', '$2y$10$g18pFw25KhvhPciORnKTTuJCMTkhZTLDmtu6cmKIC71W8YllW7U5q', NULL, '2022-05-05 22:14:00', '2022-05-09 00:27:54', 9947306123, 1, 'erumely'),
-(30, 'user4', 'user4@gmail.com', '2022-05-09 03:08:21', '$2y$10$1uJ9swbmdx6kr2DYb54BEOGbpNql/TweCD28.CmrKHtu4byav0bWi', NULL, '2022-05-09 03:07:54', '2022-05-09 03:08:21', 9988776655, 1, 'koovappaly');
+(30, 'user4', 'user4@gmail.com', '2022-05-09 03:08:21', '$2y$10$1uJ9swbmdx6kr2DYb54BEOGbpNql/TweCD28.CmrKHtu4byav0bWi', NULL, '2022-05-09 03:07:54', '2022-05-09 03:08:21', 9988776655, 1, 'koovappaly'),
+(31, 'vinu', 'vinu@gmail.com', '2022-05-12 23:32:20', '$2y$10$VTbp0S4oFztg18jv5ztu1.aeT0RiJq//.Qc6B0e4mSZaOnfl3CVMq', NULL, '2022-05-12 23:31:22', '2022-05-12 23:32:20', 9539331911, 1, 'mundakayam');
 
 --
 -- Indexes for dumped tables
@@ -624,7 +612,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -678,25 +666,25 @@ ALTER TABLE `tbl_repair`
 -- AUTO_INCREMENT for table `tbl_req_ambu`
 --
 ALTER TABLE `tbl_req_ambu`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_req_fuel`
 --
 ALTER TABLE `tbl_req_fuel`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_req_rep`
 --
 ALTER TABLE `tbl_req_rep`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
