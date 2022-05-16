@@ -297,15 +297,15 @@
         @endif
     </div>
 
-    <div class="out">
-        <div class="c" style="background:white;justify-content:center;">
+    
 
             @if(count($a)>0)
 
 
 
             @foreach($a as $tr)
-
+            <div class="out">
+        <div class="c" style="background:white;justify-content:center;">
             <div class="row">
                 <div class="col-25">
                     <label for="City">Place</label>
@@ -378,7 +378,8 @@
                     </div>
 
 
-
+                    </div>
+                </div>
 
                         @endforeach
 
@@ -387,8 +388,7 @@
                         <h1>No Request found </h1>
                         @endif
 
-                    </div>
-                </div>
+                    
 </body>
 
 </html>

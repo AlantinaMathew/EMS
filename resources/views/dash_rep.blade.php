@@ -14,6 +14,7 @@
             <tr>
                 <th>Place</th>
                 <th>Location</th>
+                <th>View Location</th>
                 <th>Fuel</th>
                 <th>Phone No</th>
                <th>Status</th>
@@ -30,6 +31,15 @@
                 <td>
                     {{$tr->location}}
                 </td>
+                <td>
+                        @if($tr->crnt_loc==0)
+                        Location not Shared
+                        @else
+
+                        <a href="{{ route('view_loc_rep', $tr->id) }}"><button class="btn"><i
+                                    class="fa fa-close"></i>View Location</button></a>
+                        @endif
+                    </td>
                 <td>
                     {{$tr->fuel}}
                 </td>

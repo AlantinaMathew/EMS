@@ -368,14 +368,15 @@
         @endif
     </div>
 
-    <div class="out">
+    
 
 
         @if(count($a)>0)
 
-
+        
 
         @foreach($a as $tr)
+        <div class="out">
         <div class="c" style="background:white;justify-content:center;">
             
                 <div class="row">
@@ -480,13 +481,26 @@
                             
                       </td>
 
-                            @endif
+                           
 
-                    </div>
-                </div>
-        </div>
+                    
+                
+        @endif
+
+</div>
+</div>
+</div>
 
 
+</div>
+</div>
+
+@endforeach
+
+
+@else
+<h1>No Request found </h1>
+@endif
 
         
         @if(Session::has('data'))
@@ -512,15 +526,9 @@
  </div>
  
  @endif
-    </div>
-    @endforeach
+   
 
 
-    @else
-    <h1>No FuelBuddies found </h1>
-    @endif
-
-
-    </div>
+    
 
 </body>

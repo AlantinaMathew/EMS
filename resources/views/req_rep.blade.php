@@ -365,14 +365,14 @@ a{
   @endif
 </div>
 
-    <div class="out">
-        <div class="c" style="background:white;justify-content:center;">
+   
 
             @if(count($a)>0)
 
 
 
-            @foreach($a as $tr)<form>
+            @foreach($a as $tr)<div class="out">
+        <div class="c" style="background:white;justify-content:center;">
             <div class="row">
                 <div class="col-25">
                     <label for="City">Name</label>
@@ -452,21 +452,18 @@ a{
   font-size: 16px;">Completed</button>
                     @endif
 
-                </div>
-            </div>
-        </div>
+</div>
+</div>
+</div>
 
 
+</div>
+</div>
 
-        </form>
-        @endforeach
+@endforeach
 
 
-        @else
-        <h1>No Request found </h1>
-        @endif
-
-    </div>
-    </div>
-
+@else
+<h1>No Request found </h1>
+@endif
 </body>

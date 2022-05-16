@@ -7,12 +7,12 @@ $.getJSON("https://json.geoiplookup.io/?callback=?", function (data) {
 $( "#ambu" ).click(function() {
     if ($('#chk').is(':checked')) {
         $("#chk").val("1");
-        alert("vhh")
+        //alert("vhh")
         
      }
      else if($('#chk').is(':not(:checked)')) {
         $("#chk").val("0");
-        alert("vhvh")
+        //alert("vhvh")
      }else{
 
      }

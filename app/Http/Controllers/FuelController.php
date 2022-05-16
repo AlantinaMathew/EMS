@@ -59,9 +59,9 @@ class FuelController extends Controller
         if($login>0)
         {
             
-                $name = "FuelBuddy";
+                
                // Session::put('name' , $name);
-                session()->put('name',$name);
+                session()->put('fuel_name',$em);
                 session()->save();
                 foreach($logf as $a)
                 {
@@ -107,7 +107,7 @@ class FuelController extends Controller
                     ->join('users','users.id','=','tbl_req_fuel.uid')
                     ->where('tbl_req_fuel.created_at', '>=', Carbon::now()->subDay())
                     ->where('tbl_req_fuel.fid','=',$lf)
-                    ->get(['tbl_req_fuel.location','tbl_req_fuel.status','tbl_req_fuel.id','tbl_req_fuel.place','tbl_req_fuel.fuel','users.phone']);
+                    ->get(['tbl_req_fuel.location','tbl_req_fuel.status','tbl_req_fuel.crnt_loc','tbl_req_fuel.id','tbl_req_fuel.place','tbl_req_fuel.fuel','users.phone']);
                     //dd($sql);
                     if($sql){
 
@@ -126,6 +126,13 @@ class FuelController extends Controller
                 }
                 
                 }
+
+                
+public function view_loc($id){
+    $find=Req_Fuel::where('id',$id)->first()
+    ->get(['latitude','longitude']);
+    return view('/app_fuel',['a'=>$find]);
+}
     public function petrol(Request $request){
         echo "abhbkjbkjb";
         $lf=session('fuel_id');
@@ -160,6 +167,9 @@ class FuelController extends Controller
         session(['fuel_loc' => $request->input('location')]);
         session(['fuel_place' => $request->input('place')]);
         session(['fuel_type' => $request->input('fuel')]);
+        session(['latitude' => $request->input('lat')]);
+        session(['longitude' => $request->input('lng')]);
+        session(['crnt' => $request->input('chk')]);
 
         // $sql=Fuel::where('place', 'like',$place)
         //     ->where('petrol_rs', '<>',NULL)
@@ -244,12 +254,18 @@ class FuelController extends Controller
     
             $loc=session('fuel_loc');
             $place=session('fuel_place');
-            
+            $latitude=session('latitude');
+        $longitude=session('longitude');
+        $c=session('crnt'); 
             $sql=new Req_fuel();
             $sql->uid=$userID;
             $sql->fid=$id;
             $sql->place=$place;
+
             $sql->location=$loc;
+            $sql->longitude=$longitude;
+            $sql->latitude= $latitude;
+            $sql->crnt_loc=$c;
             $sql->fuel=$fuel;
             $sql->price=$price;
             $sql->status=1;

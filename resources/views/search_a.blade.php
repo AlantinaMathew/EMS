@@ -323,7 +323,7 @@ a{
                     </div>
                 <div class="row">
                         <div class="col-25">
-                            <label for="Location">Location</label>
+                            <label for="Location">LandMark</label>
                         </div>
                         <div class="col-75">
                             <textarea id="location" name="location" placeholder="Write Location.." style="height:200px"required></textarea>

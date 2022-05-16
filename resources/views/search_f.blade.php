@@ -374,7 +374,7 @@ a{
     
         <div class="c" style="background:white;">
         <marquee style="color:green;">Order Fuel For Rs 550/-(500 for fuel + 50 for transportation charge)</marquee>
-            <form action="/search_fuel" method="POST"onsubmit="return sub();">
+            <form action="/search_fuel" method="POST">
             @csrf
                 <div class="row">
                     <div class="col-25">
@@ -405,7 +405,16 @@ a{
                         </select>
                     </div>
                 </div>
-                
+                <div class="row">
+                        <div class="col-25">
+                            <label for="Location">Use Current Location</label>
+                        </div>
+                        <div class="col-75"><br>
+                        
+              <input type="checkbox" name="chk" id="chk" value="0"style=" width: 40px;
+            height: 40px;background-color: #eee;"> 
+                        </div>
+                    </div>
                 <div class="row">
                         <div class="col-25">
                             <label for="Location">LandMark</label>
@@ -416,10 +425,11 @@ a{
                     </div>
 
 
-
+                    <input type="hidden" id="longitude" name="lat" value="76.789436">
+                <input type="hidden" id="latitude" name="lng" value="9.557270">
                
                 <div class="row">
-                    <input type="submit" name="sbt_fuel" value="Search">
+                    <input type="submit"id="fuel" name="sbt_fuel" value="Search">
 
 
                 </div>
@@ -428,3 +438,41 @@ a{
     </div>
 
 </body>
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script>
+     
+$.getJSON("https://json.geoiplookup.io/?callback=?", function (data) {
+    $("#latitude").val(data.latitude);
+    $("#longitude").val(data.longitude);
+    //alert(data.region);        
+});
+$( "#fuel" ).click(function() {
+    if ($('#chk').is(':checked')) {
+        $("#chk").val("1");
+        //alert("vhh")
+        
+     }
+     else if($('#chk').is(':not(:checked)')) {
+        $("#chk").val("0");
+        //alert("vhvh")
+     }else{
+
+     }
+            
+        if ($("#b")[0].selectedIndex <= 0) {
+            alert("Please select city");
+            return false;
+        }else{
+        
+        }
+        
+        if ($("#c")[0].selectedIndex <= 0) {
+            alert("Please select fuel");
+            return false;
+        }else{
+        
+        }
+}); 
+
+ </script>

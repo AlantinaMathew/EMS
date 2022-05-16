@@ -91,6 +91,15 @@ Route::POST('/search_ambu',[AmbuController::class, 'ambulist']);
 Route::POST('/admin',[AdminController::class, 'log']);
 Route::get('/req_ambu',[AmbuController::class, 'req_ambu1']);
 
+Route::get('/req_ambu_p',[AmbuController::class, 'ambu_p_r']);
+
+Route::get('/req_ambu_d',[AmbuController::class, 'ambu_d_r']);
+
+Route::get('/req_ambu_c',[AmbuController::class, 'ambu_c_r']);
+Route::get('/ambu_pro',[AmbuController::class, 'ambu_pro']);
+//Route::get('/ambu_deactivate',[AmbuController::class, 'ambu_deactivate']);
+Route::get('/ambu_logout',[AmbuController::class, 'ambu_logout']);
+
 Route::get('/decline1/{id}', [AmbuController::class, 'req_decline_ambu']) -> name('decline_ambu');
 Route::get('/accept1/{id}', [AmbuController::class, 'req_accept_ambu']) -> name('accept_ambu');
 Route::get('/complete1/{id}', [AmbuController::class, 'req_cmplt_ambu']) -> name('cmplt_ambu');
@@ -114,6 +123,12 @@ Route::POST('/reg_fuel',[FuelController::class, 'reg']);
 Route::POST('/fuellog',[FuelController::class, 'log']);
 Route::post('/update_petrol',[FuelController::class, 'petrol']);
 Route::post('/update_disel',[FuelController::class, 'disel']);
+Route::get('/view_ambu/{id}', [AmbuController::class, 'view_loc']) -> name('view_loc_ambu');
+
+Route::view('/ambu_deactivate','dash_ambu_dlt');
+Route::get('/view_fuel/{id}', [FuelController::class, 'view_loc']) -> name('view_loc_fuel');
+
+Route::get('/view_rep/{id}', [RepairController::class, 'view_loc']) -> name('view_loc_rep');
 
 Route::post('/search_fuel',[FuelController::class, 'fuelbuddy']);
 Route::get('/reqf/{id}', [FuelController::class, 'req_fuel']) -> name('reqf');

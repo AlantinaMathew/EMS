@@ -68,9 +68,9 @@ class RepairController extends Controller
         if($login>0)
         {
             
-                $name = "GoMechanic";
+                
                // Session::put('name' , $name);
-                session()->put('name',$name);
+                session()->put('rep_name',$em);
                 session()->save();
                 foreach($logf as $a)
                 {
@@ -102,7 +102,7 @@ class RepairController extends Controller
                 ->join('users','users.id','=','tbl_req_rep.uid')
                 ->where('tbl_req_rep.created_at', '>=', Carbon::now()->subDay())
                 ->where('tbl_req_rep.rid','=',$lf)
-                ->get(['tbl_req_rep.location','tbl_req_rep.status','tbl_req_rep.id','tbl_req_rep.place','tbl_req_rep.service','users.phone']);
+                ->get(['tbl_req_rep.location','tbl_req_rep.status','tbl_req_rep.crnt_loc','tbl_req_rep.id','tbl_req_rep.place','tbl_req_rep.service','users.phone']);
                 //dd($sql);
                 if($sql){
 
@@ -132,6 +132,9 @@ class RepairController extends Controller
             session(['rep_loc' => $request->input('location')]);
                session(['rep_place' => $request->input('place')]);
              session(['rep_service' => $request->input('vehicle')]);
+             session(['latitude' => $request->input('lat')]);
+             session(['longitude' => $request->input('lng')]);
+             session(['crnt' => $request->input('chk')]);
         
             //     // $sql=Fuel::where('place', 'like',$place)
             //     //     ->where('petrol_rs', '<>',NULL)
@@ -179,13 +182,18 @@ class RepairController extends Controller
             
             $userID=auth()->user()->id;
     
-           
+            $latitude=session('latitude');
+            $longitude=session('longitude');
+            $c=session('crnt'); 
             
             $sql=new Req_repair();
             $sql->uid=$userID;
             $sql->rid=$id;
             $sql->place=$place;
             $sql->location=$location;
+            $sql->longitude=$longitude;
+            $sql->latitude= $latitude;
+            $sql->crnt_loc=$c;
             $sql->service=$service;
            
             $sql->status=1;
@@ -209,6 +217,12 @@ class RepairController extends Controller
             return view('/req_rep',['a'=>$find]);
            die();      
     }
+                   
+public function view_loc($id){
+    $find=Req_repair::where('id',$id)->first()
+    ->get(['latitude','longitude']);
+    return view('/app_rep',['a'=>$find]);
+}
 
     
 public function req_decline_rep($id){

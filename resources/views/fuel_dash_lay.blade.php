@@ -146,7 +146,7 @@
 
                 <div class="logout" style="float:right">
 
-                    <i class='bx bxs-user-circle' style='font-size:58px;color:black;'></i>
+                <h1>{{ session()->get('fuel_name') }}</h1>
                 </div>
             </div>
         </nav>

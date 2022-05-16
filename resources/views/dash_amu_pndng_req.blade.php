@@ -44,16 +44,8 @@
                     {{$tr->phone}}
                 </td>
                
-                @if($tr->status==0)
-                <td>  <button style="background-color:red; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Declined</button></td>
-                                @elseif($tr->status==1)
+               
+                                @if($tr->status==1)
                                 <td> <button style="background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -82,33 +74,7 @@
   cursor: pointer;"class="btn"><i class="fa fa-check-square">Accept</i> </button></a>
   </td>
 
-                                @elseif($tr->status==2)
-                                <td>  <button style="background-color:blueviolet; /* Green */
-  border: none;
-  color: white;
- 
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Accepted</button></td>
-  <td><a href="{{ route('cmplt_ambu', $tr->id) }}">
-  <button style="background-color: DodgerBlue;
-  border: none;
-  color: white;
-  margin-left:2px;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;"class="btn"><i class="fa fa-check-square">Mark Complete</i> </button></a></td>
-                                @else
-                                <td>  <button style="background-color:black; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;">Completed</button></td>
+                                
                                 @endif
 
                            

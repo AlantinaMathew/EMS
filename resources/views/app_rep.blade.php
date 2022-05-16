@@ -28,7 +28,7 @@
     
   </head>
   <body>
-  <a href="/dash_ambu">
+  <a href="/dash_rep">
   <button style="background-color: DodgerBlue;
   border: none;
   color: white;

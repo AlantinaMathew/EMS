@@ -67,6 +67,7 @@
         background-color: #f1f1f1;
     }
     </style>
+   
 </head>
 
 <body>
@@ -105,7 +106,9 @@
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Ambulance</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_ambu.php">View Ambulance</a></li>
+                    <li><a href="/req_ambu_p">View Pending Request</a></li>
+                    <li><a href="/req_ambu_d">View Declined Request</a></li>
+                    <li><a href="/req_ambu_c">View Completed Request</a></li>
                     <!-- <li><a href="#">Request</a></li>
                     <li><a href="#">Request History</a></li> -->
                 </ul>
@@ -115,15 +118,23 @@
            
 
 
-            <li>
-                <a href="chngpass.php">
+            <!-- <li>
+            <div class="iocn-link">
+                    <a href="#">
+                <a href="">
+                    
                     <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
+                    <span class="link_name">Profile</span>
+                </a><i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                
+                   
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="chngpass.php">Setting</a></li>
+                    <li><a class="link_name" href="/ambu_deactivate">Deactivate Account</a></li>
+                    <li><a class="link_name" href="/ambu_pro">Profile</a></li>
+                
                 </ul>
-            </li>
+            </li> -->
             <hr>
             <li>
                 <a href="logout.php">
@@ -131,7 +142,7 @@
                     <span class="link_name">Log Out</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Log Out</a></li>
+                    <li><a class="link_name" href="/ambu_logout">Log Out</a></li>
                 </ul>
 
             </li>
@@ -145,7 +156,7 @@
 
                 <div class="logout" style="float:right">
 
-                    <i class='bx bxs-user-circle' style='font-size:58px;color:black;'></i>
+                    <h1>{{ session()->get('ambu_name') }}</h1>
                 </div>
             </div>
         </nav>

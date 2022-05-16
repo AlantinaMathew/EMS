@@ -57,9 +57,9 @@ class AmbuController extends Controller
                     {
                     
                         
-                            $name = 'ambulance';
+                            
                         // Session::put('name' , $name);
-                            session()->put('name',$name);
+                            session()->put('ambu_name',$em);
                             session()->save();
                             foreach($log as $a)
                             {
@@ -75,7 +75,7 @@ class AmbuController extends Controller
                             ->join('users','users.id','=','tbl_req_ambu.uid')
                             ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
                             ->where('tbl_req_ambu.aid','=',$l)
-                            ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
+                            ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.crnt_loc','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
                             if($sql){
                                 return view('/dash_ambu',['a'=>$sql]);
                         }else{
@@ -118,6 +118,7 @@ class AmbuController extends Controller
         ->where('tbl_ambu.place','=',$pl)
        ->where('tbl_ambu.status','=','1')
        ->where('tbl_req_ambu.status','<>','2')
+       
         ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
         
         ->get(['tbl_ambu.id','tbl_ambu.place','tbl_ambu.vehicle_num','tbl_ambu.phone','tbl_ambu.email']);
@@ -155,6 +156,11 @@ class AmbuController extends Controller
             return view('/req_ambu',['a'=>$find]);
            die();      
 }
+public function view_loc($id){
+    $find=Req_ambu::where('id',$id)->first()
+    ->get(['latitude','longitude']);
+    return view('/app_map',['a'=>$find]);
+}
 public function req_ambu1(){
         
     $userID=auth()->user()->id;
@@ -178,7 +184,7 @@ public function dash(){
                    ->join('users','users.id','=','tbl_req_ambu.uid')
                    ->where('tbl_req_ambu.created_at', '>=', Carbon::now()->subDay())
                    ->where('tbl_req_ambu.aid','=',$l)
-                   ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
+                   ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.crnt_loc','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
                    if($sql){
                     return view('/dash_ambu',['a'=>$sql]);
             }else{
@@ -215,6 +221,46 @@ public function req_cmplt_ambu($id){
     $update->save();
     return $this->dash();
    
+}
+public function ambu_p_r(){
+    $l=session('ambu_id');
+    $find=Req_ambu::join('tbl_ambu','tbl_ambu.id','=','tbl_req_ambu.aid')
+    ->join('users','users.id','=','tbl_req_ambu.uid')->where('tbl_req_ambu.aid','=',$l)->where('tbl_req_ambu.status', '=','1')->orderBy('id', 'DESC')
+    
+    ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.crnt_loc','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
+                  
+                //dd($find);
+                return view('/dash_amu_pndng_req',['a'=>$find]);
+               
+
+}
+
+public function ambu_d_r(){
+    $l=session('ambu_id');
+    $find=Req_ambu::join('tbl_ambu','tbl_ambu.id','=','tbl_req_ambu.aid')
+    ->join('users','users.id','=','tbl_req_ambu.uid')->where('tbl_req_ambu.aid','=',$l)->where('tbl_req_ambu.status', '=','0')->orderBy('id', 'DESC')
+    
+    ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.crnt_loc','tbl_req_ambu.id','tbl_ambu.place','users.phone']);
+                  
+                return view('/dash_ambu_dcln_req',['a'=>$find]);
+               
+}
+public function ambu_c_r(){
+    $l=session('ambu_id');
+   
+    $find=Req_ambu::join('tbl_ambu','tbl_ambu.id','=','tbl_req_ambu.aid')
+    ->join('users','users.id','=','tbl_req_ambu.uid')->where('tbl_req_ambu.aid','=',$l)
+                  ->where('tbl_req_ambu.status', '=','2')->orWhere('tbl_req_ambu.status', '=','3')->orWhere('tbl_req_ambu.status', '=','4')->orderBy('id', 'DESC')
+                  ->get(['tbl_req_ambu.location','tbl_req_ambu.status','tbl_req_ambu.crnt_loc','tbl_req_ambu.id','tbl_ambu.place','users.phone']);                //dd($find);
+                return view('/dash_ambu_acpt_req',['a'=>$find]);
+               
+
+}
+public function ambu_logout(){
+    session()->forget('ambu_id');
+    session()->forget('ambu_name');
+    return view('/ambu_login');
+        
 }
 }
    

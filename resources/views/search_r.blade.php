@@ -370,7 +370,7 @@ a{
 <body>
     <div class="out">
         <div class="c" style="background:white;">
-            <form action="/search_repair" method="POST"onsubmit="return sub();">
+            <form action="/search_repair" method="POST">
             @csrf
                 <div class="row">
                     <div class="col-25">
@@ -405,17 +405,29 @@ a{
                 </div>
                 <div class="row">
                         <div class="col-25">
-                            <label for="Location">Location</label>
+                            <label for="Location">Use Current Location</label>
+                        </div>
+                        <div class="col-75"><br>
+                        
+              <input type="checkbox" name="chk" id="chk" value="0"style=" width: 40px;
+            height: 40px;background-color: #eee;"> 
+                        </div>
+                    </div>
+                <div class="row">
+                        <div class="col-25">
+                            <label for="Location">LandMark</label>
                         </div>
                         <div class="col-75">
                             <textarea id="location" name="location" placeholder="Write Location.." style="height:200px"required></textarea>
                         </div>
                     </div>
 
-
+                    <input type="hidden" id="longitude" name="lat" value="76.789436">
+                <input type="hidden" id="latitude" name="lng" value="9.557270">
+               
                 
                 <div class="row">
-                    <input type="submit" name="sbt_donor" value="Search">
+                    <input type="submit"id="repair" name="sbt_donor" value="Search">
 
 
                 </div>
@@ -423,19 +435,42 @@ a{
         </div>
     </div>
 </body>
-<script>
-    function sub(){
-       
-var a=document.getElementById('c');
-var b=document.getElementById('b');
- 
- if(b.selectedIndex <=0 ||a.selectedIndex <=0 ){
-     alert("Select all the fields");
-     return false;
-}else{
-    //alert("Select all the fi");
-    return true;
-}
-    }
-</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script>
+     
+$.getJSON("https://json.geoiplookup.io/?callback=?", function (data) {
+    $("#latitude").val(data.latitude);
+    $("#longitude").val(data.longitude);
+   // alert(data.region);        
+});
+$( "#repair" ).click(function() {
+    if ($('#chk').is(':checked')) {
+        $("#chk").val("1");
+       // alert("vhh")
+        
+     }
+     else if($('#chk').is(':not(:checked)')) {
+        $("#chk").val("0");
+        //alert("vhvh")
+     }else{
+
+     }
+            
+        if ($("#b")[0].selectedIndex <= 0) {
+            alert("Please select city");
+            return false;
+        }else{
+        
+        }
+        
+        if ($("#c")[0].selectedIndex <= 0) {
+            alert("Please select fuel");
+            return false;
+        }else{
+        
+        }
+}); 
+
+ </script>
 
