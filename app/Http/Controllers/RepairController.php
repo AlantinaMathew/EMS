@@ -248,5 +248,43 @@ public function req_cmplt_rep($id){
    
 }
 
+public function rep_p_r(){
+    $l=session('rep_id');
+    $find=Req_repair::join('tbl_repair','tbl_repair.id','=','tbl_req_rep.rid')
+    ->join('users','users.id','=','tbl_req_rep.uid')->where('tbl_req_rep.rid','=',$l)->where('tbl_req_rep.status', '=','1')->orderBy('id', 'DESC')
+    
+    ->get(['tbl_req_rep.location','tbl_req_rep.service','tbl_req_rep.status','tbl_req_rep.crnt_loc','tbl_req_rep.id','tbl_req_rep.place','users.phone']);    
+                  
+                return view('/dash_rep_p',['a'=>$find]);
+               
+
+}
+
+public function rep_d_r(){
+    $l=session('rep_id');
+    $find=Req_repair::join('tbl_repair','tbl_repair.id','=','tbl_req_rep.rid')
+    ->join('users','users.id','=','tbl_req_rep.uid')->where('tbl_req_rep.rid','=',$l)->where('tbl_req_rep.status', '=','0')->orderBy('id', 'DESC')
+    
+    ->get(['tbl_req_rep.location','tbl_req_rep.service','tbl_req_rep.status','tbl_req_rep.crnt_loc','tbl_req_rep.id','tbl_req_rep.place','users.phone']);    
+                  
+                return view('/dash_rep_d',['a'=>$find]);
+               
+}
+public function rep_c_r(){
+    $l=session('rep_id');
+   
+    $find=Req_repair::join('tbl_repair','tbl_repair.id','=','tbl_req_rep.rid')
+    ->join('users','users.id','=','tbl_req_rep.uid')->where('tbl_req_rep.rid','=',$l)
+                  ->where('tbl_req_rep.status', '=','2')->orWhere('tbl_req_rep.status', '=','3')->orWhere('tbl_req_rep.status', '=','4')->orderBy('id', 'DESC')
+                  ->get(['tbl_req_rep.location','tbl_req_rep.service','tbl_req_rep.status','tbl_req_rep.crnt_loc','tbl_req_rep.id','tbl_req_rep.place','users.phone']);                //dd($find);
+                return view('/dash_rep_c',['a'=>$find]);
+               
+
+}
+public function rep_logout(){
+    session()->forget('rep_id');
+    session()->forget('rep_name');
+    return view('/fuel_login');
         
+}        
 }

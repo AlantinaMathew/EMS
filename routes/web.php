@@ -92,13 +92,24 @@ Route::POST('/admin',[AdminController::class, 'log']);
 Route::get('/req_ambu',[AmbuController::class, 'req_ambu1']);
 
 Route::get('/req_ambu_p',[AmbuController::class, 'ambu_p_r']);
-
 Route::get('/req_ambu_d',[AmbuController::class, 'ambu_d_r']);
-
 Route::get('/req_ambu_c',[AmbuController::class, 'ambu_c_r']);
+
+
+Route::get('/req_fuel_p',[FuelController::class, 'fuel_p_r']);
+Route::get('/req_fuel_d',[FuelController::class, 'fuel_d_r']);
+Route::get('/req_fuel_c',[FuelController::class, 'fuel_c_r']);
+
+
+Route::get('/req_rep_p',[RepairController::class, 'rep_p_r']);
+Route::get('/req_rep_d',[RepairController::class, 'rep_d_r']);
+Route::get('/req_rep_c',[RepairController::class, 'rep_c_r']);
+
 Route::get('/ambu_pro',[AmbuController::class, 'ambu_pro']);
 //Route::get('/ambu_deactivate',[AmbuController::class, 'ambu_deactivate']);
 Route::get('/ambu_logout',[AmbuController::class, 'ambu_logout']);
+Route::get('/fuel_logout',[FuelController::class, 'fuel_logout']);
+Route::get('/rep_logout',[RepairController::class, 'rep_logout']);
 
 Route::get('/decline1/{id}', [AmbuController::class, 'req_decline_ambu']) -> name('decline_ambu');
 Route::get('/accept1/{id}', [AmbuController::class, 'req_accept_ambu']) -> name('accept_ambu');

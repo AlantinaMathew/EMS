@@ -88,7 +88,7 @@
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/dash_ambu">Dashboard</a></li>
+                    <li><a class="link_name" href="/dash_rep">Dashboard</a></li>
                 </ul>
             </li>
             <hr>
@@ -102,35 +102,24 @@
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Ready Repair</a></li>
+                <li><a class="link_name" href="#">Request</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_repair.php">View Members</a></li>
-                    <!-- <li><a href="#">Request</a></li>
-                    <li><a href="#">Request History</a></li> -->
+                    <li><a href="/req_rep_p">View Pending Request</a></li>
+                    <li><a href="/req_rep_d">View Declined Request</a></li>
+                    <li><a href="/req_rep_c">View Completed Request</a></li>
                 </ul>
             </li>
            
             <hr>
            
 
-
-            <li>
-                <a href="chngpass.php">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Setting</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="chngpass.php">Setting</a></li>
-                </ul>
-            </li>
-            <hr>
             <li>
                 <a href="logout.php">
                     <i class='bx bx-log-out'></i>
                     <span class="link_name">Log Out</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Log Out</a></li>
+                    <li><a class="link_name" href="/rep_logout">Log Out</a></li>
                 </ul>
 
             </li>

@@ -314,4 +314,46 @@ public function view_loc($id){
         
         }
 
+        
+public function fuel_p_r(){
+    $l=session('fuel_id');
+    $find=Req_fuel::join('tbl_fuel','tbl_fuel.id','=','tbl_req_fuel.fid')
+    ->join('users','users.id','=','tbl_req_fuel.uid')->where('tbl_req_fuel.fid','=',$l)->where('tbl_req_fuel.status', '=','1')->orderBy('id', 'DESC')
+    
+    ->get(['tbl_req_fuel.location','tbl_req_fuel.status','tbl_req_fuel.crnt_loc','tbl_req_fuel.place','tbl_req_fuel.fuel','tbl_req_fuel.price','tbl_req_fuel.id','users.phone']);
+                  
+                //dd($find);
+                return view('/dash_fuel_p',['a'=>$find]);
+               
+
+}
+
+public function fuel_d_r(){
+    $l=session('fuel_id');
+    $find=Req_fuel::join('tbl_fuel','tbl_fuel.id','=','tbl_req_fuel.fid')
+    ->join('users','users.id','=','tbl_req_fuel.uid')->where('tbl_req_fuel.fid','=',$l)->where('tbl_req_fuel.status', '=','0')->orderBy('id', 'DESC')
+    
+    ->get(['tbl_req_fuel.location','tbl_req_fuel.status','tbl_req_fuel.crnt_loc','tbl_req_fuel.fuel','tbl_req_fuel.price','tbl_req_fuel.id','tbl_req_fuel.place','users.phone']);
+                  
+                return view('/dash_fuel_d',['a'=>$find]);
+               
+}
+public function fuel_c_r(){
+    $l=session('fuel_id');
+   
+    $find=Req_fuel::join('tbl_fuel','tbl_fuel.id','=','tbl_req_fuel.fid')
+    ->join('users','users.id','=','tbl_req_fuel.uid')->where('tbl_req_fuel.fid','=',$l)
+                  ->where('tbl_req_fuel.status', '=','2')->orWhere('tbl_req_fuel.status', '=','3')->orWhere('tbl_req_fuel.status', '=','4')->orderBy('id', 'DESC')
+                  ->get(['tbl_req_fuel.location','tbl_req_fuel.fuel','tbl_req_fuel.price','tbl_req_fuel.status','tbl_req_fuel.crnt_loc','tbl_req_fuel.id','tbl_req_fuel.place','users.phone']);                //dd($find);
+                return view('/dash_fuel_c',['a'=>$find]);
+               
+
+}
+public function fuel_logout(){
+    session()->forget('fuel_id');
+    session()->forget('fuel_name');
+    return view('/fuel_login');
+        
+} 
+
 }

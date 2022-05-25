@@ -83,12 +83,12 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="dash.php" class="active">
+                <a href="/dash_fuel" class="active">
                     <i class='bx bx-grid-alt bx-tada'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="/dash_ambu">Dashboard</a></li>
+                    <li><a class="link_name" href="/dash_fuel">Dashboard</a></li>
                 </ul>
             </li>
             <hr>
@@ -103,16 +103,16 @@
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">FuelBudy</a></li>
+                <li><a class="link_name" href="#">Request</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_fuel.php">View FuelBudy</a></li>
-                    <!-- <li><a href="#">Request</a></li>
-                    <li><a href="#">Request History</a></li> -->
+                    <li><a href="/req_fuel_p">View Pending Request</a></li>
+                    <li><a href="/req_fuel_d">View Declined Request</a></li>
+                    <li><a href="/req_fuel_c">View Completed Request</a></li>
                 </ul>
             </li>
 
            
-            <hr>
+            <!-- <hr>
            
 
 
@@ -124,7 +124,7 @@
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="chngpass.php">Setting</a></li>
                 </ul>
-            </li>
+            </li> -->
             <hr>
             <li>
                 <a href="logout.php">
@@ -132,7 +132,7 @@
                     <span class="link_name">Log Out</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Log Out</a></li>
+                    <li><a class="link_name" href="/fuel_logout">Log Out</a></li>
                 </ul>
 
             </li>

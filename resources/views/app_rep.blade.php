@@ -59,9 +59,9 @@
     
     <script>
            var Long = $("#longitude").val();
-           alert(Long);
+           //alert(Long);
            var Lat = $("#latitude").val();
-           alert(Lat);
+           //alert(Lat);
            function showMap()
         {
             initMap(Long,Lat);

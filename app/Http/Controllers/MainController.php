@@ -20,26 +20,7 @@ class MainController extends Controller
 
     //dd($find);
   echo($find);
-    //dd($find);
-    // if($find){
-    //   // $update=  User::where('id',$userID)->first();
-      // $update->password =Hash::make($request->input('password1'));
-      // $update->save();
-     
-      // if($update){
-        
-      //   return view('/change_password');
-      //   die();
-      // }else{
-       
-      //   return redirect()->back()->with('message','Error!!Try again');
-      // }
-      
-  // }else{
     
-  //   //$sql=  DonorReg::where('uid','=',$userID)->get();
-  //    return redirect()->back()->with('message','Password is Incorrect');
-  // }
     
   }
 
@@ -62,7 +43,6 @@ class MainController extends Controller
         $donor = new DonorReg;
         $donor->uid = $id;
         $donor->dob = $request->input('dob');
-
         $donor->medlyf = $request->input('med');
         $donor->weight = $request->input('kg');
         $donor->gender = $request->input('gender');
