@@ -37,6 +37,14 @@ Route::view('/dash', 'dash');
 
 Route::view('/pswd', 'change_password');
 Route::view('/admindash', 'admindash'); 
+Route::view('/ad_view_user', 'ad_view_u'); 
+
+Route::view('/ad_view_donor', 'ad_view_d'); 
+
+Route::view('/ad_view_ambu', 'ad_view_ambu'); 
+Route::view('/ad_view_fuel', 'ad_view_f');
+Route::view('/ad_view_rep', 'ad_view_r');  
+Route::view('/ad_logout', 'adminlog');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -83,12 +83,12 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="dash.php" class="active">
+                <a href="/admindash" class="active">
                     <i class='bx bx-grid-alt bx-tada'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="dash.php">Dashboard</a></li>
+                    <li><a class="link_name" href="/admindash">Dashboard</a></li>
                 </ul>
             </li>
             <hr>
@@ -104,7 +104,7 @@
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">User</a></li>
                     <!--li><a href="add_user.php">Add User</a></!--li-->
-                    <li><a href="view_user.php">View User</a></li>
+                    <li><a href="/ad_view_user">View User</a></li>
                     <!-- <li><a href="#">Request History</a></li> -->
 
                 </ul>
@@ -122,7 +122,7 @@
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#"> Blood Donor</a></li>
                     <!--li><a href="add_donor.php">Add Donor</a></!--li-->
-                    <li><a href="view_donor.php">View Donor</a></li>
+                    <li><a href="/ad_view_donor">View Donor</a></li>
                     <!-- <li><a href="#">Services</a></li>
                     <li><a href="#">Request History</a></li> -->
 
@@ -141,7 +141,7 @@
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Ambulance</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_ambu.php">View Ambulance</a></li>
+                    <li><a href="/ad_view_ambu">View Ambulance</a></li>
                     <!-- <li><a href="#">Request</a></li>
                     <li><a href="#">Request History</a></li> -->
                 </ul>
@@ -159,7 +159,7 @@
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">FuelBudy</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_fuel.php">View FuelBudy</a></li>
+                    <li><a href="/ad_view_fuel">View FuelBudy</a></li>
                     <!-- <li><a href="#">Request</a></li>
                     <li><a href="#">Request History</a></li> -->
                 </ul>
@@ -177,7 +177,7 @@
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Ready Repair</a></li>
                     <!-- <li><a href="#">Add Ambulance</a></li> -->
-                    <li><a href="view_repair.php">View Members</a></li>
+                    <li><a href="/ad_view_rep">View Members</a></li>
                     <!-- <li><a href="#">Request</a></li>
                     <li><a href="#">Request History</a></li> -->
                 </ul>
@@ -197,7 +197,7 @@
 
             </li> -->
 
-
+<!-- 
             <li>
                 <a href="chngpass.php">
                     <i class='bx bx-cog'></i>
@@ -207,14 +207,14 @@
                     <li><a class="link_name" href="chngpass.php">Setting</a></li>
                 </ul>
             </li>
-            <hr>
+            <hr> -->
             <li>
-                <a href="logout.php">
+                <a href="#">
                     <i class='bx bx-log-out'></i>
                     <span class="link_name">Log Out</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="logout.php">Log Out</a></li>
+                    <li><a class="link_name" href="/ad_logout">Log Out</a></li>
                 </ul>
 
             </li>
