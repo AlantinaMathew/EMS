@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2022 at 09:18 PM
+-- Generation Time: May 25, 2022 at 08:49 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -159,7 +159,8 @@ INSERT INTO `payments` (`id`, `req_id`, `uid`, `fid`, `amount`, `payment_id`, `r
 (41, 13, 28, 9, 550, 'order_JUO9yeQKhFWaLV', NULL, 0, '2022-05-12 11:22:12', '2022-05-12 11:22:12'),
 (42, 13, 28, 9, 300, 'order_JUOAEMwkziPlbt', 'pay_JUOAd2aHTWynp4', 1, '2022-05-12 11:22:26', '2022-05-12 11:22:54'),
 (43, 15, 28, 4, 550, 'order_JUPIAjs7hlNhnq', 'pay_JUPIrkq3h5Eu35', 1, '2022-05-12 12:28:39', '2022-05-12 12:29:24'),
-(44, 17, 29, 9, 550, 'order_JV2uuVwt18DqDY', 'pay_JV2vLt0dN7xtsp', 1, '2022-05-14 03:14:23', '2022-05-14 03:14:55');
+(44, 17, 29, 9, 550, 'order_JV2uuVwt18DqDY', 'pay_JV2vLt0dN7xtsp', 1, '2022-05-14 03:14:23', '2022-05-14 03:14:55'),
+(45, 32, 31, 10, 550, 'order_JWFphC0xnfgPy4', 'pay_JWFq3GPbFcqrlG', 1, '2022-05-17 04:31:28', '2022-05-17 04:31:53');
 
 -- --------------------------------------------------------
 
@@ -364,6 +365,13 @@ CREATE TABLE `tbl_req_ambu` (
   `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `tbl_req_ambu`
+--
+
+INSERT INTO `tbl_req_ambu` (`id`, `uid`, `aid`, `location`, `longitude`, `latitude`, `crnt_loc`, `created_at`, `updated_at`, `status`) VALUES
+(3, 31, 18, 'near ptta', '19.1266', '73.0136', 1, '2022-05-17 04:26:29', '2022-05-17 04:28:01', '0');
+
 -- --------------------------------------------------------
 
 --
@@ -391,7 +399,10 @@ CREATE TABLE `tbl_req_fuel` (
 --
 
 INSERT INTO `tbl_req_fuel` (`id`, `uid`, `fid`, `place`, `location`, `crnt_loc`, `longitude`, `latitude`, `fuel`, `price`, `created_at`, `updated_at`, `status`) VALUES
-(30, 31, 1, 'kanjirappaly', 'hh', 1, '9.557270', '76.789436', 'Petrol', '109.0000', '2022-05-16 13:43:36', '2022-05-16 13:43:36', '1');
+(30, 31, 1, 'kanjirappaly', 'hh', 1, '9.557270', '76.789436', 'Petrol', '109.0000', '2022-05-16 13:43:36', '2022-05-16 13:43:36', '1'),
+(31, 31, 4, 'kanjirappaly', 'gg', 1, '19.1266', '73.0136', 'Petrol', '110.7800', '2022-05-17 04:28:28', '2022-05-17 04:28:28', '1'),
+(32, 31, 10, 'kanjirappaly', 'g', 1, '19.1266', '73.0136', 'Petrol', '110.7800', '2022-05-17 04:29:29', '2022-05-17 04:31:53', '4'),
+(33, 31, 1, 'kanjirappaly', 'naer petta kavala', 1, '19.136', '73.0039', 'Petrol', '109.0000', '2022-05-23 01:10:34', '2022-05-23 01:16:50', '3');
 
 -- --------------------------------------------------------
 
@@ -419,7 +430,8 @@ CREATE TABLE `tbl_req_rep` (
 --
 
 INSERT INTO `tbl_req_rep` (`id`, `uid`, `rid`, `place`, `location`, `crnt_loc`, `longitude`, `latitude`, `service`, `created_at`, `updated_at`, `status`) VALUES
-(9, 31, 5, 'erumely', 'k', 1, '19.1266', '73.0136', 'Two Wheeler', '2022-05-16 06:32:15', '2022-05-16 06:32:15', 1);
+(9, 31, 5, 'erumely', 'k', 1, '19.1266', '73.0136', 'Two Wheeler', '2022-05-16 06:32:15', '2022-05-25 10:01:53', 0),
+(11, 31, 5, 'kanjirappaly', 'near petta kavala', 1, '28.6306', '77.2239', 'Two Wheeler', '2022-05-25 09:58:31', '2022-05-25 10:02:13', 3);
 
 -- --------------------------------------------------------
 
@@ -612,7 +624,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -666,19 +678,19 @@ ALTER TABLE `tbl_repair`
 -- AUTO_INCREMENT for table `tbl_req_ambu`
 --
 ALTER TABLE `tbl_req_ambu`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_req_fuel`
 --
 ALTER TABLE `tbl_req_fuel`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_req_rep`
 --
 ALTER TABLE `tbl_req_rep`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
