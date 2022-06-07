@@ -177,7 +177,7 @@ public function view_loc($id){
         //     dd($sql);
        
             $find=Req_fuel::where('uid',$userID)
-            ->where('tbl_req_fuel.created_at', '>=', Carbon::now()->subDay())->count();
+            ->where('created_at', '>=', Carbon::now()->subDay())->count();
             if($find>0){
                    if($fuel=='Petrol'){
                     $sql=Fuel::join('tbl_req_fuel','tbl_req_fuel.fid','<>','tbl_fuel.id')
