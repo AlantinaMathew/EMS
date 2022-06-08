@@ -13,7 +13,7 @@ class adminController extends Controller
        ->where('password',$ps)
        ->count();
         if($login>0)
-        {
+        { 
             
                 $name = 'admin';
                // Session::put('name' , $name);
