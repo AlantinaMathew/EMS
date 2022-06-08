@@ -114,7 +114,7 @@
            
 
             <li>
-                <a href="logout.php">
+                <a href="/rep_logout">
                     <i class='bx bx-log-out'></i>
                     <span class="link_name">Log Out</span>
                 </a>
