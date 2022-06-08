@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\req_fuel;
 use App\Models\User;
 use App\Models\fuel;
-use App\Models\payment;
+use App\Models\Payment;
 use Monolog\SignalHandler;
 use Razorpay\Api\Api;
 
