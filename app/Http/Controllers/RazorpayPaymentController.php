@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Req_fuel;
+use App\Models\req_fuel;
 use App\Models\User;
-use App\Models\Fuel;
-use App\Models\Payment;
+use App\Models\fuel;
+use App\Models\payment;
 use Monolog\SignalHandler;
 use Razorpay\Api\Api;
 
