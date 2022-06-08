@@ -285,7 +285,7 @@ a {
                                 </tr>
                                 <tr> 
                                   <?php
-                             $db = mysqli_connect("localhost","root","","finaldb");
+                             $db = mysqli_connect("vbtassaezz","vbtassaezz","JweRnE9dQ9","finaldb");
                              $userID=auth()->user()->id;
                               
                               $sql = "SELECT * FROM payments WHERE `uid`='$userID' and `payment_done`=1 order by id desc limit 1";
