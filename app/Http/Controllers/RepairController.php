@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Repair;
+use App\Models\repair;
 use App\Models\User;
-use App\Models\Req_repair;
-use App\Models\Rep_loc;
-use App\Models\Rep_service;
+use App\Models\req_repair;
+use App\Models\rep_loc;
+use App\Models\rep_service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
